@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const userRoute = require("./routes/userRoute");
+const errorHandler = require("./middleWare/errorMiddleware");
 
 const app = express();
 
@@ -21,8 +22,10 @@ app.get("/", (req, res) => {
   res.send("Home page");
 });
 
-const PORT = process.env.PORT || 3001;
+//ErrorMiddleWare
+app.use(errorHandler);
 
+const PORT = process.env.PORT || 3001;
 // Connect to DB and start server
 mongoose
   .connect(process.env.MONGO_URI, {
