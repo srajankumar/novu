@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema(
       required: [true, "Please add a password"],
       // Password length constraints
       minLength: [6, "Password must be at least 6 characters"],
-      maxLength: [23, "Password must not exceed 23 characters"],
+      //   maxLength: [23, "Password must not exceed 23 characters"],
     },
     // URL for the user's profile photo
     photo: {
