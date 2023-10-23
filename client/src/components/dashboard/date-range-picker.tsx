@@ -17,9 +17,10 @@ import {
 export function CalendarDateRangePicker({
   className,
 }: React.HTMLAttributes<HTMLDivElement>) {
+  const currentDate = new Date(); // Get the current date
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2023, 0, 20),
-    to: addDays(new Date(2023, 0, 20), 20),
+    from: currentDate,
+    to: currentDate,
   });
 
   return (
@@ -30,17 +31,14 @@ export function CalendarDateRangePicker({
             id="date"
             variant={"outline"}
             className={cn(
-              "w-[260px] justify-start text-left font-normal",
+              "w-[150px] justify-start text-left font-normal",
               !date && "text-muted-foreground"
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date?.from ? (
               date.to ? (
-                <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
-                </>
+                <>{format(date.from, "LLL dd, y")}</>
               ) : (
                 format(date.from, "LLL dd, y")
               )
@@ -49,7 +47,7 @@ export function CalendarDateRangePicker({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="end">
+        {/* <PopoverContent className="w-auto p-0" align="end">
           <Calendar
             initialFocus
             mode="range"
@@ -58,7 +56,7 @@ export function CalendarDateRangePicker({
             onSelect={setDate}
             numberOfMonths={2}
           />
-        </PopoverContent>
+        </PopoverContent> */}
       </Popover>
     </div>
   );
