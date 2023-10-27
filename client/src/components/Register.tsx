@@ -42,7 +42,7 @@ export default function Register() {
         password,
       });
       alert("Registration Completed! Login to continue");
-      // navigate(<Login />);
+      window.location.href = "/login";
     } catch (err) {
       console.error(err);
     }

@@ -12,15 +12,42 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import axios from "axios";
 import Link from "next/link";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
+import { useCookies } from "react-cookie";
+import { NavigationProvider, useNavigation } from "react-day-picker";
 
 export default function Login() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [, setCookies] = useCookies(["access_token"]);
+
+  // const navigate=NavigationProvider('/')
+
+  const onSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/auth/login", {
+        username,
+        password,
+      });
+
+      // if (response.data.user) {
+      setCookies("access_token", response.data.token);
+      window.localStorage.setItem("userID", response.data.userID);
+      // stUserNotFound(false); // Reset user not found state
+      window.location.href = "/";
+      // } else {
+      //   setUserNotFound(true); // Set user not found state to true
+      // }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Login</CardTitle>

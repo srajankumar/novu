@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+"use client";
+// import { Metadata } from "next";
 import Image from "next/image";
 
 import { Button } from "@/components/ui//button";
@@ -23,11 +24,7 @@ import { Search } from "@/components/dashboard/search";
 import TeamSwitcher from "@/components/dashboard/team-switcher";
 import { UserNav } from "@/components/dashboard/user-nav";
 import ThemeToggle from "@/components/ThemeToggle";
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
-};
+import AuthButton from "@/components/ui/authButton";
 
 export default function DashboardPage() {
   return (
@@ -65,6 +62,7 @@ export default function DashboardPage() {
               <CalendarDateRangePicker />
               <TeamSwitcher />
               <ThemeToggle />
+              <AuthButton />
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
