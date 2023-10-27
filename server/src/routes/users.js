@@ -9,7 +9,7 @@ export { router as userRouter };
 // User Registration Route
 router.post("/register", async (req, res) => {
   // Extract email, username, and password from the request body
-  const { email, username, password } = req.body;
+  const { email, username, password, phone } = req.body;
 
   // Check if a user with the same username already exists
   const user = await UserModel.findOne({ username });
@@ -22,7 +22,12 @@ router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create a new user with the hashed password and save it to the database
-  const newUser = new UserModel({ email, username, password: hashedPassword });
+  const newUser = new UserModel({
+    email,
+    username,
+    phone,
+    password: hashedPassword,
+  });
   await newUser.save();
 
   res.json({ message: "User registered successfully !" });
