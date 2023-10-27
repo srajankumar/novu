@@ -17,7 +17,7 @@ import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
 import { useCookies } from "react-cookie";
 
-export default function Login() {
+export default function DriverLogin() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [, setCookies] = useCookies(["access_token"]);
@@ -25,7 +25,7 @@ export default function Login() {
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", {
+      const response = await axios.post("http://localhost:3001/Driver/login", {
         username,
         password,
       });
@@ -33,7 +33,7 @@ export default function Login() {
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);
 
-      window.location.href = "/";
+      window.location.href = "/driver/dashboard";
     } catch (err) {
       console.error(err);
     }
