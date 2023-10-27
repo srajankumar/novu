@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 dotenv.config();
 // making env available throughout the app
 import { userRouter } from "./routes/users.js";
+import { driverRouter } from "./routes/drivers.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 // get data in json format from the frontend
 app.use(cors());
 app.use("/auth", userRouter);
+app.use("/driver", driverRouter);
 // auth == endpoint route related to the authentications, and these will be in users.js
 
 mongoose.connect(process.env.MONGO_URI, {
