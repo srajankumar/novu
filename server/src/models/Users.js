@@ -1,11 +1,9 @@
-// Import the Mongoose library
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-// Create a User Schema
-const userSchema = mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     // Name of the user
-    name: {
+    username: {
       type: String,
       required: [true, "Please add a name"],
     },
@@ -27,26 +25,11 @@ const userSchema = mongoose.Schema(
       required: [true, "Please add a password"],
       // Password length constraints
       minLength: [6, "Password must be at least 6 characters"],
-      //   maxLength: [23, "Password must not exceed 23 characters"],
     },
-    // URL for the user's profile photo
-    photo: {
-      type: String,
-      required: [true, "Please add a photo"],
-      default: "https://i.ibb.co/4pDNDk1/avatar.png",
-    },
-    // Phone number of the user
     phone: {
       type: String,
       required: [true, "Please add a phone number"],
       default: "+91",
-    },
-    // A brief biography of the user
-    bio: {
-      type: String,
-      // Maximum length for the bio
-      maxLength: [250, "Bio must not exceed 250 characters"],
-      default: "Bio",
     },
   },
   {
@@ -55,8 +38,4 @@ const userSchema = mongoose.Schema(
   }
 );
 
-// Create a User model based on the schema
-const User = mongoose.model("User", userSchema);
-
-// Export the User model for use in other parts of your application
-module.exports = User;
+export const UserModel = mongoose.model("users", UserSchema);
