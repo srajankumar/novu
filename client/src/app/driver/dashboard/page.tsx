@@ -23,6 +23,7 @@ import { Search } from "@/components/dashboard/search";
 import TeamSwitcher from "@/components/dashboard/team-switcher";
 import { UserNav } from "@/components/dashboard/user-nav";
 import ThemeToggle from "@/components/ThemeToggle";
+import DriverAuthButton from "@/components/ui/DriverAuthButton";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -65,6 +66,7 @@ export default function DashboardPage() {
               <CalendarDateRangePicker />
               <TeamSwitcher />
               <ThemeToggle />
+              <DriverAuthButton />
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
