@@ -26,8 +26,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <Sidebar /> */}
-          <div>{children}</div>
+          <div suppressHydrationWarning>{children}</div>
         </ThemeProvider>
       </body>
     </html>

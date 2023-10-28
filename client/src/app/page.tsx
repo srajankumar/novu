@@ -24,7 +24,10 @@ import { Search } from "@/components/dashboard/search";
 import TeamSwitcher from "@/components/dashboard/team-switcher";
 import { UserNav } from "@/components/dashboard/user-nav";
 import ThemeToggle from "@/components/ThemeToggle";
-import AuthButton from "@/components/ui/authButton";
+import AuthButton from "@/components/ui/AuthButton";
+
+import AddDriver from "@/components/AddDriver";
+import DisplayDrivers from "@/components/DisplayDriver";
 
 export default function DashboardPage() {
   return (
@@ -68,12 +71,10 @@ export default function DashboardPage() {
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="schedule">Schedule</TabsTrigger>
+              <TabsTrigger value="adddrivers">Add Drivers</TabsTrigger>
+              <TabsTrigger value="drivers">Drivers</TabsTrigger>
               <TabsTrigger value="vehicles" disabled>
                 Vehicles
-              </TabsTrigger>
-              <TabsTrigger value="drivers" disabled>
-                Drivers
               </TabsTrigger>
               <TabsTrigger value="map" disabled>
                 Map
@@ -204,6 +205,12 @@ export default function DashboardPage() {
                   </CardContent>
                 </Card>
               </div>
+            </TabsContent>
+            <TabsContent value="adddrivers" className="space-y-4">
+              <AddDriver />
+            </TabsContent>
+            <TabsContent value="drivers" className="space-y-4">
+              <DisplayDrivers />
             </TabsContent>
           </Tabs>
         </div>

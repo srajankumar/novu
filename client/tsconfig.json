@@ -27,7 +27,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/test1/page.jsx"
+    "src/app/test1/page.jsx",
+    "src/components/DisplayDriver.jsx",
+    "src/components/Login.jsx"
   ],
   "exclude": ["node_modules"]
 }
