@@ -31,6 +31,7 @@ const DriverSchema = new mongoose.Schema(
       required: [true, "Please add a phone number"],
       default: "+91",
     },
+    savedInfo: [{ type: mongoose.Schema.Types.ObjectId, ref: "drivers" }],
   },
   {
     // Automatically add 'createdAt' and 'updatedAt' timestamps
