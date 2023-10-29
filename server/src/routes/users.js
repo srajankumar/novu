@@ -31,7 +31,7 @@ router.post("/register", verifyToken, async (req, res) => {
   });
   await newUser.save();
 
-  res.json({ message: "User registered successfully !" });
+  res.json({ message: "User registered successfully!" });
 });
 
 // User Login Route
@@ -42,7 +42,7 @@ router.post("/login", verifyToken, async (req, res) => {
   // Find the user with the provided username
   const user = await UserModel.findOne({ username });
   if (!user) {
-    return res.json({ message: "User Doesnt exist" });
+    return res.json({ message: "User doesn't exist" });
   }
 
   // Compare the provided password with the stored hashed password using bcrypt
