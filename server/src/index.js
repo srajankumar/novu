@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+dotenv.config();
 import { userRouter } from "./routes/users.js";
 import { driverRouter } from "./routes/drivers.js";
 import { infoRouter } from "./routes/driverinfo.js";

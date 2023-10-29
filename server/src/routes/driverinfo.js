@@ -4,10 +4,9 @@ import { DriverModel } from "../models/Drivers.js";
 
 const router = express.Router();
 
-// Get Driver Information
-router.get("/info", verifyToken, async (req, res) => {
+// Get all driver information
+router.get("/info", async (req, res) => {
   try {
-    // Retrieve driver information from the database
     const response = await DriverInfoModel.find({});
     res.json(response);
   } catch (err) {
@@ -15,9 +14,8 @@ router.get("/info", verifyToken, async (req, res) => {
   }
 });
 
-// Create Driver Information
-router.post("/info", verifyToken, async (req, res) => {
-  // Create and save new driver information to the database
+// Create a new driver information record
+router.post("/info", async (req, res) => {
   const info = new DriverInfoModel(req.body);
   try {
     const response = await info.save();
@@ -27,10 +25,9 @@ router.post("/info", verifyToken, async (req, res) => {
   }
 });
 
-// Update Driver Information for a Driver
-router.put("/info", verifyToken, async (req, res) => {
+// Add driver information to a driver's profile
+router.put("/info", async (req, res) => {
   try {
-    // Find and update driver and their saved information
     const info = await DriverInfoModel.findById(req.body.infoID);
     const driver = await DriverModel.findById(req.body.driverID);
     driver.savedInfo.push(info);
@@ -41,10 +38,9 @@ router.put("/info", verifyToken, async (req, res) => {
   }
 });
 
-// Get Saved Information IDs for a Driver
-router.get("/savedInfo/ids", verifyToken, async (req, res) => {
+// Get a list of saved driver information IDs for a specific user
+router.get("/savedInfo/ids", async (req, res) => {
   try {
-    // Find and retrieve the IDs of saved information for a driver
     const driver = await DriverModel.findById(req.params.userID);
     res.json({ savedInfo: driver?.savedInfo });
   } catch (err) {
@@ -52,10 +48,9 @@ router.get("/savedInfo/ids", verifyToken, async (req, res) => {
   }
 });
 
-// Get Saved Information for a Driver
-router.get("/savedInfo", verifyToken, async (req, res) => {
+// Get detailed information for saved driver records
+router.get("/savedInfo", async (req, res) => {
   try {
-    // Find and retrieve the saved information objects for a driver
     const driver = await DriverModel.findById(req.params.driverID);
     const savedInfo = await DriverModel.find({
       _id: { $in: driver.savedInfo },
