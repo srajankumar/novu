@@ -22,6 +22,7 @@ import { RecentSales } from "@/components/dashboard/recent-sales";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import DriverAuthButton from "@/components/ui/DriverAuthButton";
+import AddDriver from "../addDriver/page";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -70,6 +71,8 @@ export default function DashboardPage() {
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
+              <TabsTrigger value="adddrivers">Add Drivers</TabsTrigger>
+
               <TabsTrigger value="vehicles" disabled>
                 Vehicles
               </TabsTrigger>
@@ -205,6 +208,9 @@ export default function DashboardPage() {
                   </CardContent>
                 </Card>
               </div>
+            </TabsContent>
+            <TabsContent value="adddrivers" className="space-y-4">
+              <AddDriver />
             </TabsContent>
           </Tabs>
         </div>

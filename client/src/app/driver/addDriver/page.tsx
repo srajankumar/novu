@@ -9,7 +9,7 @@ import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 
-export default function DriverRegister() {
+export default function AddDriver() {
   return (
     <form className="flex pb-20 justify-center">
       <div className="flex flex-col w-full lg:px-40">
@@ -21,8 +21,8 @@ export default function DriverRegister() {
               id="username"
               type="text"
               placeholder="Full Name"
-              // value={username}
-              // onChange={(event) => setUsername(event.target.value)}
+              //   value={username}
+              //   onChange={(event) => setUsername(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -31,8 +31,8 @@ export default function DriverRegister() {
               id="phone"
               type="number"
               placeholder="Your ten-digit mobile number"
-              // value={phone}
-              // onChange={(event) => setPhone(event.target.value)}
+              //   value={phone}
+              //   onChange={(event) => setPhone(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -41,8 +41,8 @@ export default function DriverRegister() {
               id="email"
               type="email"
               placeholder="m@example.com"
-              // value={email}
-              // onChange={(event) => setEmail(event.target.value)}
+              //   value={email}
+              //   onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -51,8 +51,8 @@ export default function DriverRegister() {
               id="password"
               type="password"
               placeholder="Strong Password"
-              // value={password}
-              // onChange={(event) => setPassword(event.target.value)}
+              //   value={password}
+              //   onChange={(event) => setPassword(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -61,8 +61,8 @@ export default function DriverRegister() {
               id="birthdate"
               type="text"
               placeholder="YYYY-MM-DD"
-              // value={birthdate}
-              // onChange={(event) => setBirthdate(event.target.value)}
+              //   value={birthdate}
+              //   onChange={(event) => setBirthdate(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -71,8 +71,8 @@ export default function DriverRegister() {
               id="imageUrl"
               type="text"
               placeholder="Image URL"
-              // value={imageUrl}
-              // onChange={(event) => setImageUrl(event.target.value)}
+              //   value={imageUrl}
+              //   onChange={(event) => setImageUrl(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -81,8 +81,8 @@ export default function DriverRegister() {
               id="license"
               type="text"
               placeholder="Driver's License"
-              // value={license}
-              // onChange={(event) => setLicense(event.target.value)}
+              //   value={license}
+              //   onChange={(event) => setLicense(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -91,8 +91,8 @@ export default function DriverRegister() {
               id="busID"
               type="text"
               placeholder="Bus ID"
-              // value={busID}
-              // onChange={(event) => setBusID(event.target.value)}
+              //   value={busID}
+              //   onChange={(event) => setBusID(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -101,8 +101,8 @@ export default function DriverRegister() {
               id="routeID"
               type="text"
               placeholder="Route ID"
-              // value={routeID}
-              // onChange={(event) => setRouteID(event.target.value)}
+              //   value={routeID}
+              //   onChange={(event) => setRouteID(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -111,8 +111,8 @@ export default function DriverRegister() {
               id="experience"
               type="number"
               placeholder="Years of Experience"
-              // value={experience}
-              // onChange={(event) => setExperience(event.target.value)}
+              //   value={experience}
+              //   onChange={(event) => setExperience(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -121,8 +121,8 @@ export default function DriverRegister() {
             <Textarea
               id="bio"
               placeholder="Driver's Bio"
-              // value={bio}
-              // onChange={(event) => setBio(event.target.value)}
+              //   value={bio}
+              //   onChange={(event) => setBio(event.target.value)}
             />
           </div>
 
