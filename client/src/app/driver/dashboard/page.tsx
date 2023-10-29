@@ -1,3 +1,4 @@
+"use client";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -23,11 +24,9 @@ import { RecentSales } from "@/components/dashboard/recent-sales";
 import ThemeToggle from "@/components/ThemeToggle";
 import DriverAuthButton from "@/components/ui/DriverAuthButton";
 import AddDriver from "../addDriver/page";
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
-};
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { SavedInfo } from "../profile/info";
 
 export default function DashboardPage() {
   return (
@@ -71,8 +70,8 @@ export default function DashboardPage() {
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
-              <TabsTrigger value="adddrivers">Add Drivers</TabsTrigger>
-
+              <TabsTrigger value="addrivers">Add Drivers</TabsTrigger>
+              <TabsTrigger value="info">SavedInfo</TabsTrigger>
               <TabsTrigger value="vehicles" disabled>
                 Vehicles
               </TabsTrigger>
@@ -209,8 +208,11 @@ export default function DashboardPage() {
                 </Card>
               </div>
             </TabsContent>
-            <TabsContent value="adddrivers" className="space-y-4">
+            <TabsContent value="addrivers" className="space-y-4">
               <AddDriver />
+            </TabsContent>
+            <TabsContent value="info" className="space-y-4">
+              <SavedInfo />
             </TabsContent>
           </Tabs>
         </div>
