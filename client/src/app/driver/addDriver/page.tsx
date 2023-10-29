@@ -8,10 +8,45 @@ import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
 import axios from "axios";
+import { useGetDriverID } from "@/hooks/useGetDriverID";
 
 export default function AddDriver() {
+  const driverID = useGetDriverID();
+  const [information, setInformation] = useState({
+    name: "",
+    birthdate: "",
+    phone: +91,
+    imageUrl: "",
+    license: "",
+    busID: "",
+    routeID: "",
+    experience: 0,
+    bio: "",
+    userOwner: driverID,
+  });
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setInformation({ ...information, [name]: value });
+  };
+
+  const onSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      await axios.post("http://localhost:3001/driver/info", information, {
+        // headers: { authorization: cookies.access_token },
+      });
+      alert("Driver Information Added");
+      window.location.href = "/driver/dashboard";
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <form className="flex pb-20 justify-center">
+    <form onSubmit={onSubmit} className="flex pb-20 justify-center">
       <div className="flex flex-col w-full lg:px-40">
         <div className="text-2xl font-bold py-10">Add Driver</div>
         <div className="grid gap-4">
@@ -21,6 +56,8 @@ export default function AddDriver() {
               id="username"
               type="text"
               placeholder="Full Name"
+              name="name"
+              onChange={handleChange}
               //   value={username}
               //   onChange={(event) => setUsername(event.target.value)}
             />
@@ -31,6 +68,8 @@ export default function AddDriver() {
               id="phone"
               type="number"
               placeholder="Your ten-digit mobile number"
+              name="phone"
+              onChange={handleChange}
               //   value={phone}
               //   onChange={(event) => setPhone(event.target.value)}
             />
@@ -41,26 +80,21 @@ export default function AddDriver() {
               id="email"
               type="email"
               placeholder="m@example.com"
+              name="email"
+              onChange={handleChange}
               //   value={email}
               //   onChange={(event) => setEmail(event.target.value)}
             />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Strong Password"
-              //   value={password}
-              //   onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
+
           <div className="grid gap-2">
             <Label htmlFor="birthdate">Birthdate</Label>
             <Input
               id="birthdate"
               type="text"
               placeholder="YYYY-MM-DD"
+              name="birthdate"
+              onChange={handleChange}
               //   value={birthdate}
               //   onChange={(event) => setBirthdate(event.target.value)}
             />
@@ -71,6 +105,8 @@ export default function AddDriver() {
               id="imageUrl"
               type="text"
               placeholder="Image URL"
+              name="imageUrl"
+              onChange={handleChange}
               //   value={imageUrl}
               //   onChange={(event) => setImageUrl(event.target.value)}
             />
@@ -81,6 +117,8 @@ export default function AddDriver() {
               id="license"
               type="text"
               placeholder="Driver's License"
+              name="license"
+              onChange={handleChange}
               //   value={license}
               //   onChange={(event) => setLicense(event.target.value)}
             />
@@ -91,6 +129,8 @@ export default function AddDriver() {
               id="busID"
               type="text"
               placeholder="Bus ID"
+              name="busID"
+              onChange={handleChange}
               //   value={busID}
               //   onChange={(event) => setBusID(event.target.value)}
             />
@@ -101,6 +141,8 @@ export default function AddDriver() {
               id="routeID"
               type="text"
               placeholder="Route ID"
+              name="routeID"
+              onChange={handleChange}
               //   value={routeID}
               //   onChange={(event) => setRouteID(event.target.value)}
             />
@@ -111,6 +153,8 @@ export default function AddDriver() {
               id="experience"
               type="number"
               placeholder="Years of Experience"
+              name="experience"
+              onChange={handleChange}
               //   value={experience}
               //   onChange={(event) => setExperience(event.target.value)}
             />
@@ -121,6 +165,8 @@ export default function AddDriver() {
             <Textarea
               id="bio"
               placeholder="Driver's Bio"
+              name="bio"
+              onChange={handleChange}
               //   value={bio}
               //   onChange={(event) => setBio(event.target.value)}
             />

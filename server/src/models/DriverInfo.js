@@ -8,7 +8,7 @@ const DriverInfoSchema = new mongoose.Schema({
   birthdate: { type: String, required: true },
   phone: { type: Number, required: true },
   imageUrl: { type: String, required: true },
-  license: { type: Number, required: true },
+  license: { type: String, required: true },
   busID: { type: String, required: true },
   routeID: { type: String, required: true },
   experience: { type: Number, required: true },
