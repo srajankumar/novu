@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define a MongoDB schema for driver information
 const DriverInfoSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -20,4 +21,5 @@ const DriverInfoSchema = new mongoose.Schema({
   },
 });
 
+// Create a DriverInfo model based on the schema
 export const DriverInfoModel = mongoose.model("DriverInfo", DriverInfoSchema);
