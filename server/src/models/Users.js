@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define a MongoDB schema for user data
 const UserSchema = new mongoose.Schema(
   {
     // Name of the user
@@ -38,4 +39,5 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+// Create a User model based on the schema
 export const UserModel = mongoose.model("users", UserSchema);
