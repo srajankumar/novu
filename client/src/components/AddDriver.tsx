@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import axios from "axios";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+"use client";
+import { Button } from "@/components/ui/button";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+
 import Link from "next/link";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
+import axios from "axios";
 
 export default function DriverRegister() {
-  const [name, setName] = useState("");
-  const [birthdate, setBirthdate] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  // Additional Fields
+  const [birthdate, setBirthdate] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [license, setLicense] = useState("");
   const [busID, setBusID] = useState("");
@@ -24,13 +24,30 @@ export default function DriverRegister() {
   const [experience, setExperience] = useState("");
   const [bio, setBio] = useState("");
 
+  const clearForm = () => {
+    setEmail("");
+    setPhone("");
+    setUsername("");
+    setPassword("");
+    setBirthdate("");
+    setImageUrl("");
+    setLicense("");
+    setBusID("");
+    setRouteID("");
+    setExperience("");
+    setBio("");
+  };
+
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+
     try {
-      await axios.post("http://localhost:3001/driver/info", {
-        name,
-        birthdate,
+      await axios.post("http://localhost:3001/Driver/register", {
+        username,
         phone,
+        email,
+        password,
+        birthdate, // Include additional fields in the request
         imageUrl,
         license,
         busID,
@@ -38,29 +55,57 @@ export default function DriverRegister() {
         experience,
         bio,
       });
-      alert("Driver Registration Completed!");
-      // You can redirect to a different page if needed
+      alert("Driver added!");
+      clearForm();
+      // window.location.href = "/driver/login";
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <Card>
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Driver Registration</CardTitle>
-        </CardHeader>
-        <CardContent className="grid w-96 gap-4">
+    <form onSubmit={onSubmit} className="flex pb-20 justify-center">
+      <div className="flex flex-col w-full lg:px-40">
+        <div className="text-2xl font-bold py-10">Add Driver</div>
+        <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="username">Name</Label>
             <Input
-              id="name"
+              id="username"
               type="text"
               placeholder="Full Name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              required
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input
+              id="phone"
+              type="number"
+              placeholder="Your ten-digit mobile number"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Strong Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -71,18 +116,6 @@ export default function DriverRegister() {
               placeholder="YYYY-MM-DD"
               value={birthdate}
               onChange={(event) => setBirthdate(event.target.value)}
-              required
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="phone">Phone</Label>
-            <Input
-              id="phone"
-              type="number"
-              placeholder="Your ten digit mobile number"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-              required
             />
           </div>
           <div className="grid gap-2">
@@ -93,18 +126,16 @@ export default function DriverRegister() {
               placeholder="Image URL"
               value={imageUrl}
               onChange={(event) => setImageUrl(event.target.value)}
-              required
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="license">License Number</Label>
             <Input
               id="license"
-              type="number"
-              placeholder="Driver's License Number"
+              type="text"
+              placeholder="Driver's License"
               value={license}
               onChange={(event) => setLicense(event.target.value)}
-              required
             />
           </div>
           <div className="grid gap-2">
@@ -115,7 +146,6 @@ export default function DriverRegister() {
               placeholder="Bus ID"
               value={busID}
               onChange={(event) => setBusID(event.target.value)}
-              required
             />
           </div>
           <div className="grid gap-2">
@@ -126,40 +156,36 @@ export default function DriverRegister() {
               placeholder="Route ID"
               value={routeID}
               onChange={(event) => setRouteID(event.target.value)}
-              required
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="experience">Experience</Label>
+            <Label htmlFor="experience">Experience (years)</Label>
             <Input
               id="experience"
               type="number"
-              placeholder="Years of experience"
+              placeholder="Years of Experience"
               value={experience}
               onChange={(event) => setExperience(event.target.value)}
-              required
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="bio">Bio</Label>
-            <Input
+
+            <Textarea
               id="bio"
-              type="text"
-              placeholder="Short Bio"
+              placeholder="Driver's Bio"
               value={bio}
               onChange={(event) => setBio(event.target.value)}
-              required
             />
           </div>
-        </CardContent>
-        <CardFooter>
-          <div className="grid gap-3 w-full">
+
+          <div className="grid gap-2">
             <Button className="w-full" type="submit">
-              Register
+              Add Driver
             </Button>
           </div>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </form>
   );
 }

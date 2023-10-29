@@ -72,12 +72,6 @@ export default function DriverLogin() {
             <Button className="w-full" type="submit">
               Login
             </Button>
-            <div className="space-x-2 text-sm">
-              <span>Do not have an account?</span>
-              <Link href="/register" className="hover:underline">
-                Register
-              </Link>
-            </div>
           </div>
         </CardFooter>
       </Card>

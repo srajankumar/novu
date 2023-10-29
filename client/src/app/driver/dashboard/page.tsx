@@ -16,12 +16,10 @@ import {
   TabsTrigger,
 } from "@/components/ui//tabs";
 import { CalendarDateRangePicker } from "@/components/dashboard/date-range-picker";
-import { MainNav } from "@/components/dashboard/main-nav";
+
 import { Overview } from "@/components/dashboard/overview";
 import { RecentSales } from "@/components/dashboard/recent-sales";
-import { Search } from "@/components/dashboard/search";
-import TeamSwitcher from "@/components/dashboard/team-switcher";
-import { UserNav } from "@/components/dashboard/user-nav";
+
 import ThemeToggle from "@/components/ThemeToggle";
 import DriverAuthButton from "@/components/ui/DriverAuthButton";
 
@@ -64,7 +62,6 @@ export default function DashboardPage() {
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />
-              <TeamSwitcher />
               <ThemeToggle />
               <DriverAuthButton />
             </div>

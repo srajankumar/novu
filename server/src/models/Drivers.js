@@ -32,6 +32,36 @@ const DriverSchema = new mongoose.Schema(
       default: "+91",
     },
     savedInfo: [{ type: mongoose.Schema.Types.ObjectId, ref: "drivers" }],
+
+    // Additional Fields
+    birthdate: {
+      type: String,
+      required: [true, "Please add a birthdate"],
+    },
+    imageUrl: {
+      type: String,
+      required: [true, "Please add an image URL"],
+    },
+    license: {
+      type: Number,
+      required: [true, "Please add a license number"],
+    },
+    busID: {
+      type: String,
+      required: [true, "Please add a bus ID"],
+    },
+    routeID: {
+      type: String,
+      required: [true, "Please add a route ID"],
+    },
+    experience: {
+      type: Number,
+      required: [true, "Please add experience in years"],
+    },
+    bio: {
+      type: String,
+      required: [true, "Please add a bio"],
+    },
   },
   {
     // Automatically add 'createdAt' and 'updatedAt' timestamps
