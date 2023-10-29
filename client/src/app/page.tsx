@@ -22,8 +22,8 @@ import { RecentSales } from "@/components/dashboard/recent-sales";
 import ThemeToggle from "@/components/ThemeToggle";
 import AuthButton from "@/components/dashboard/AuthButton";
 
-import AddDriver from "@/components/AddDriver";
-import DisplayDrivers from "@/components/DisplayDriver";
+import AddDriver from "@/components/dashboard/AddDriver";
+import DisplayDriver from "@/components/dashboard/DisplayDriver";
 
 export default function DashboardPage() {
   return (
@@ -196,7 +196,7 @@ export default function DashboardPage() {
               <AddDriver />
             </TabsContent>
             <TabsContent value="drivers" className="space-y-4">
-              <DisplayDrivers />
+              <DisplayDriver />
             </TabsContent>
           </Tabs>
         </div>
