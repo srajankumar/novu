@@ -12,6 +12,8 @@ const DriverInfoSchema = new mongoose.Schema({
   license: { type: String, required: true },
   busID: { type: String, required: true },
   routeID: { type: String, required: true },
+  from: { type: String, required: true },
+  to: { type: String, required: true },
   experience: { type: Number, required: true },
   bio: { type: String, required: true },
   userOwner: {
