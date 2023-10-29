@@ -1,13 +1,10 @@
 import express from "express";
-// import mongoose from "mongoose";
-
-// import { UserModel } from "../models/Users.js";
-// import { verifyToken } from "./users.js";
 import { DriverInfoModel } from "../models/DriverInfo.js";
 import { DriverModel } from "../models/Drivers.js";
 
 const router = express.Router();
 
+// Get all driver information
 router.get("/info", async (req, res) => {
   try {
     const response = await DriverInfoModel.find({});
@@ -17,6 +14,7 @@ router.get("/info", async (req, res) => {
   }
 });
 
+// Create a new driver information record
 router.post("/info", async (req, res) => {
   const info = new DriverInfoModel(req.body);
   try {
@@ -27,6 +25,7 @@ router.post("/info", async (req, res) => {
   }
 });
 
+// Add driver information to a driver's profile
 router.put("/info", async (req, res) => {
   try {
     const info = await DriverInfoModel.findById(req.body.infoID);
@@ -39,6 +38,7 @@ router.put("/info", async (req, res) => {
   }
 });
 
+// Get a list of saved driver information IDs for a specific user
 router.get("/savedInfo/ids", async (req, res) => {
   try {
     const driver = await DriverModel.findById(req.params.userID);
@@ -48,6 +48,7 @@ router.get("/savedInfo/ids", async (req, res) => {
   }
 });
 
+// Get detailed information for saved driver records
 router.get("/savedInfo", async (req, res) => {
   try {
     const driver = await DriverModel.findById(req.params.driverID);
@@ -59,4 +60,5 @@ router.get("/savedInfo", async (req, res) => {
     res.json(err);
   }
 });
+
 export { router as infoRouter };

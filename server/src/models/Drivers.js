@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define a MongoDB schema for driver data
 const DriverSchema = new mongoose.Schema(
   {
     // Name of the Driver
@@ -7,7 +8,7 @@ const DriverSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add a name"],
     },
-    // Email of the user
+    // Email of the driver
     email: {
       type: String,
       required: [true, "Please add an email"],
@@ -19,49 +20,20 @@ const DriverSchema = new mongoose.Schema(
         "Please enter a valid email",
       ],
     },
-    // Password of the user
+    // Password of the driver
     password: {
       type: String,
       required: [true, "Please add a password"],
       // Password length constraints
       minLength: [6, "Password must be at least 6 characters"],
     },
+    // Phone of the driver
     phone: {
       type: String,
       required: [true, "Please add a phone number"],
       default: "+91",
     },
     savedInfo: [{ type: mongoose.Schema.Types.ObjectId, ref: "drivers" }],
-
-    // Additional Fields
-    birthdate: {
-      type: String,
-      required: [true, "Please add a birthdate"],
-    },
-    imageUrl: {
-      type: String,
-      required: [true, "Please add an image URL"],
-    },
-    license: {
-      type: Number,
-      required: [true, "Please add a license number"],
-    },
-    busID: {
-      type: String,
-      required: [true, "Please add a bus ID"],
-    },
-    routeID: {
-      type: String,
-      required: [true, "Please add a route ID"],
-    },
-    experience: {
-      type: Number,
-      required: [true, "Please add experience in years"],
-    },
-    bio: {
-      type: String,
-      required: [true, "Please add a bio"],
-    },
   },
   {
     // Automatically add 'createdAt' and 'updatedAt' timestamps
@@ -69,4 +41,5 @@ const DriverSchema = new mongoose.Schema(
   }
 );
 
+// Create a Driver model based on the schema
 export const DriverModel = mongoose.model("drivers", DriverSchema);
