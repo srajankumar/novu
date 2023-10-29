@@ -8,7 +8,7 @@ import { DriverModel } from "../models/Drivers.js";
 
 const router = express.Router();
 
-router.get("/info", async (req, res) => {
+router.get("/info", verifyToken, async (req, res) => {
   try {
     const response = await DriverInfoModel.find({});
     res.json(response);
@@ -17,7 +17,7 @@ router.get("/info", async (req, res) => {
   }
 });
 
-router.post("/info", async (req, res) => {
+router.post("/info", verifyToken, async (req, res) => {
   const info = new DriverInfoModel(req.body);
   try {
     const response = await info.save();
@@ -27,7 +27,7 @@ router.post("/info", async (req, res) => {
   }
 });
 
-router.put("/info", async (req, res) => {
+router.put("/info", verifyToken, async (req, res) => {
   try {
     const info = await DriverInfoModel.findById(req.body.infoID);
     const driver = await DriverModel.findById(req.body.driverID);
@@ -39,7 +39,7 @@ router.put("/info", async (req, res) => {
   }
 });
 
-router.get("/savedInfo/ids", async (req, res) => {
+router.get("/savedInfo/ids", verifyToken, async (req, res) => {
   try {
     const driver = await DriverModel.findById(req.params.userID);
     res.json({ savedInfo: driver?.savedInfo });
@@ -48,7 +48,7 @@ router.get("/savedInfo/ids", async (req, res) => {
   }
 });
 
-router.get("/savedInfo", async (req, res) => {
+router.get("/savedInfo", verifyToken, async (req, res) => {
   try {
     const driver = await DriverModel.findById(req.params.driverID);
     const savedInfo = await DriverModel.find({

@@ -7,7 +7,7 @@ const router = express.Router();
 export { router as driverRouter };
 
 // User Registration Route
-router.post("/register", async (req, res) => {
+router.post("/register", verifyToken, async (req, res) => {
   // Extract email, username, and password from the request body
   const { email, username, password, phone } = req.body;
 
@@ -34,7 +34,7 @@ router.post("/register", async (req, res) => {
 });
 
 // User Login Route
-router.post("/login", async (req, res) => {
+router.post("/login", verifyToken, async (req, res) => {
   // Extract username and password from the request body
   const { username, password } = req.body;
 
