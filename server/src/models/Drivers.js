@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define a MongoDB schema for driver data
 const DriverSchema = new mongoose.Schema(
   {
     // Name of the Driver
@@ -7,7 +8,7 @@ const DriverSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add a name"],
     },
-    // Email of the user
+    // Email of the driver
     email: {
       type: String,
       required: [true, "Please add an email"],
@@ -19,13 +20,14 @@ const DriverSchema = new mongoose.Schema(
         "Please enter a valid email",
       ],
     },
-    // Password of the user
+    // Password of the driver
     password: {
       type: String,
       required: [true, "Please add a password"],
       // Password length constraints
       minLength: [6, "Password must be at least 6 characters"],
     },
+    // Phone of the driver
     phone: {
       type: String,
       required: [true, "Please add a phone number"],
@@ -39,4 +41,5 @@ const DriverSchema = new mongoose.Schema(
   }
 );
 
+// Create a Driver model based on the schema
 export const DriverModel = mongoose.model("drivers", DriverSchema);
