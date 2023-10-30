@@ -35,7 +35,7 @@ export default function Login() {
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);
 
-      window.location.href = "/";
+      window.location.href = "/admin/dashboard";
     } catch (err) {
       console.error(err);
     }
@@ -76,7 +76,7 @@ export default function Login() {
             </Button>
             <div className="space-x-2 text-sm">
               <span>Do not have an account?</span>
-              <Link href="/register" className="hover:underline">
+              <Link href="/admin/register" className="hover:underline">
                 Register
               </Link>
             </div>

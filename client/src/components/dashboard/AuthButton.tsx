@@ -14,7 +14,7 @@ const AuthButton = () => {
   return (
     <div>
       {!cookies.access_token ? (
-        <Link href="/login">
+        <Link href="/admin/login">
           <Button variant="outline">Login</Button>
         </Link>
       ) : (

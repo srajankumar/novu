@@ -42,7 +42,7 @@ export default function Register() {
         password,
       });
       alert("Registration Completed! Login to continue");
-      window.location.href = "/login";
+      window.location.href = "/admin/login";
     } catch (err) {
       console.error(err);
     }
@@ -103,7 +103,7 @@ export default function Register() {
             </Button>
             <div className="space-x-2 text-sm">
               <span>Already have an account?</span>
-              <Link href="/login" className="hover:underline">
+              <Link href="/admin/login" className="hover:underline">
                 Login
               </Link>
             </div>

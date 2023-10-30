@@ -8,7 +8,7 @@ const DriverAuthButton = () => {
   const logout = () => {
     setCookies("access_token", "");
     window.localStorage.removeItem("userID");
-    window.location.href = "/driver/dashboard";
+    window.location.href = "/";
   };
 
   return (
