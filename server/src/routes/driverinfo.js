@@ -1,3 +1,4 @@
+// Import necessary modules and models
 import express from "express";
 import { DriverInfoModel } from "../models/DriverInfo.js";
 import { DriverModel } from "../models/Drivers.js";
@@ -61,4 +62,53 @@ router.get("/savedInfo", async (req, res) => {
   }
 });
 
+// Update driver information
+router.put("/info/:id", async (req, res) => {
+  try {
+    const driverInfoId = req.params.id;
+    const updatedInfo = req.body;
+
+    const updatedDriverInfo = await DriverInfoModel.findByIdAndUpdate(
+      driverInfoId,
+      updatedInfo,
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedDriverInfo) {
+      return res.status(404).json({ message: "Driver information not found" });
+    }
+
+    res.json(updatedDriverInfo);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete driver information by ID
+router.delete("/info/:id", async (req, res) => {
+  try {
+    const driverInfoId = req.params.id;
+
+    // Find and remove the driver information by ID
+    const deletedDriverInfo = await DriverInfoModel.findByIdAndRemove(
+      driverInfoId
+    );
+
+    if (!deletedDriverInfo) {
+      return res.status(404).json({ message: "Driver information not found" });
+    }
+
+    // Remove the deleted driver information from any driver's saved info list
+    await DriverModel.updateMany(
+      { savedInfo: driverInfoId },
+      { $pull: { savedInfo: driverInfoId } }
+    );
+
+    res.json(deletedDriverInfo);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Export the router
 export { router as infoRouter };

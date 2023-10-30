@@ -122,6 +122,7 @@ export default function AddDriver() {
               //   onChange={(event) => setBirthdate(event.target.value)}
             />
           </div>
+
           <div className="grid gap-2">
             <Label htmlFor="imageUrl">Image URL</Label>
             <Input

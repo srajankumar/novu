@@ -61,4 +61,53 @@ router.get("/savedInfo", async (req, res) => {
   }
 });
 
+// Update vehicle information by ID
+router.put("/info/:id", async (req, res) => {
+  try {
+    const vehicleId = req.params.id;
+    const updatedInfo = req.body;
+
+    // Find the vehicle information by its ID and update it
+    const updatedVehicleInfo = await VehicleInfoModel.findByIdAndUpdate(
+      vehicleId,
+      updatedInfo,
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedVehicleInfo) {
+      return res.status(404).json({ message: "Vehicle information not found" });
+    }
+
+    res.json(updatedVehicleInfo);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete vehicle information by ID
+router.delete("/info/:id", async (req, res) => {
+  try {
+    const vehicleInfoId = req.params.id;
+
+    // Find and remove the vehicle information by ID
+    const deletedVehicleInfo = await VehicleInfoModel.findByIdAndRemove(
+      vehicleInfoId
+    );
+
+    if (!deletedVehicleInfo) {
+      return res.status(404).json({ message: "Vehicle information not found" });
+    }
+
+    // Remove the deleted vehicle information from any driver's saved vehicle info list
+    await DriverModel.updateMany(
+      { savedVehicleInfo: vehicleInfoId },
+      { $pull: { savedVehicleInfo: vehicleInfoId } }
+    );
+
+    res.json(deletedVehicleInfo);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 export { router as vehicleRouter };
