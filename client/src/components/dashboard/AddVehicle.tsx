@@ -13,6 +13,8 @@ export default function AddVehicle() {
     year: "",
     plateNumber: "",
     color: "",
+    longitude: "",
+    latitude: "",
     owner: driverID,
   });
 
@@ -23,6 +25,8 @@ export default function AddVehicle() {
       year: "",
       plateNumber: "",
       color: "",
+      longitude: "",
+      latitude: "",
       owner: driverID,
     });
   };
@@ -98,6 +102,28 @@ export default function AddVehicle() {
               onChange={handleChange}
             />
           </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="latitude">Latitude</Label>
+            <Input
+              id="latitude"
+              type="text"
+              placeholder="Latitude"
+              name="latitude"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="longitude">Longitude</Label>
+            <Input
+              id="longitude"
+              type="text"
+              placeholder="Longitude"
+              name="longitude"
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="grid gap-2">
             <Button className="w-full" type="submit">
               Add Vehicle

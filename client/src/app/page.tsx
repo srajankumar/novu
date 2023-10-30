@@ -5,6 +5,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import Map from "@/components/dashboard/Map";
+
+import { useCookies } from "react-cookie";
+
 interface DriverInfo {
   _id: string;
   name: string;
@@ -56,6 +60,8 @@ export default function DashboardPage() {
   const [vehicleInformation, setVehicleInformation] = useState<VehicleInfo[]>(
     []
   );
+  const [cookies] = useCookies(["username"]);
+  const userName = cookies.username;
 
   useEffect(() => {
     const fetchDriverInfo = async () => {
@@ -82,27 +88,14 @@ export default function DashboardPage() {
     fetchVehicleInfo();
   }, []);
 
-  const driversWithEmptyBusID = driverInformation.filter(
-    (driver) => !driver.busID
+  const driversWithBusIDZero = driverInformation.filter(
+    (driver) => driver.busID === "0"
   );
 
   return (
     <>
-      <div className="md:hidden">
-        <Image
-          src="/examples/dashboard-light.png"
-          width={1280}
-          height={866}
-          alt="Dashboard"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/dashboard-dark.png"
-          width={1280}
-          height={866}
-          alt="Dashboard"
-          className="hidden dark:block"
-        />
+      <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
+        <h1>Not Supported</h1>
       </div>
       <div className="hidden flex-col md:flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
@@ -121,12 +114,37 @@ export default function DashboardPage() {
               <TabsTrigger value="drivers">Drivers</TabsTrigger>
               <TabsTrigger value="addvehicles">Add Vehicles</TabsTrigger>
               <TabsTrigger value="vehicles">Vehicles</TabsTrigger>
-              <TabsTrigger value="map" disabled>
-                Map
-              </TabsTrigger>
+              <TabsTrigger value="map">Map</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">
+                      Welcome
+                    </CardTitle>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      className="h-4 w-4 text-muted-foreground"
+                    >
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                    </svg>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">
+                      {userName || "User"}
+                    </div>
+                    {/* <p className="text-xs text-muted-foreground">
+                      +201 since last hour
+                    </p> */}
+                  </CardContent>
+                </Card>
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
@@ -162,17 +180,18 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Total Vehicles
                     </CardTitle>
+
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
                       className="h-4 w-4 text-muted-foreground"
                     >
-                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      <path
+                        fill="currentColor"
+                        d="M0 5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v2h-2V5H2v7h6v2H2v4h6v2H5.414L3.5 21.914L2.086 20.5l.5-.5H2a2 2 0 0 1-2-2V5Zm11.323 3h10.354L24 13.807V21.5h-2V20H11v1.5H9v-7.693L11.323 8ZM11 18h11v-3.807L21.923 14H11.077l-.077.193V18Zm.877-6h9.246l-.8-2h-7.646l-.8 2ZM3 15h2.004v2.004H3V15Zm9 0h2.004v2.004H12V15Zm7 0h2.004v2.004H19V15Z"
+                      />
                     </svg>
                   </CardHeader>
                   <CardContent>
@@ -192,50 +211,24 @@ export default function DashboardPage() {
                     </CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
+                      width="15"
+                      height="15"
+                      viewBox="0 0 20 20"
                       className="h-4 w-4 text-muted-foreground"
                     >
-                      <rect width="20" height="14" x="2" y="5" rx="2" />
-                      <path d="M2 10h20" />
+                      <path
+                        fill="currentColor"
+                        d="M5 6a4 4 0 1 1 8 0a4 4 0 0 1-8 0Zm-3 7c0-1.113.903-2 2.009-2h6.248A5.477 5.477 0 0 0 9 14.5c0 1.303.453 2.5 1.21 3.443c-.395.038-.8.057-1.21.057c-1.855 0-3.583-.386-4.865-1.203C2.833 15.967 2 14.69 2 13Zm17 1.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm-2.146-1.854a.5.5 0 0 0-.708 0L13.5 15.293l-.646-.647a.5.5 0 0 0-.708.708l1 1a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0 0-.708Z"
+                      />
                     </svg>
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">
-                      {driversWithEmptyBusID.length}
+                      {driversWithBusIDZero.length}
                     </div>
                     {/* <p className="text-xs text-muted-foreground">
                       +19% from last month
                     </p> */}
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
-                      Active Now
-                    </CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                    </svg>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">+573</div>
-                    <p className="text-xs text-muted-foreground">
-                      +201 since last hour
-                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -248,7 +241,7 @@ export default function DashboardPage() {
                     <Overview />
                   </CardContent>
                 </Card>
-                <Card className="col-span-3">
+                <Card className="col-span-4 lg:col-span-3">
                   <CardHeader>
                     <CardTitle>Active Drivers</CardTitle>
                     <CardDescription>Driver information</CardDescription>
@@ -270,6 +263,9 @@ export default function DashboardPage() {
             </TabsContent>
             <TabsContent value="vehicles" className="space-y-4">
               <DisplayVehicle />
+            </TabsContent>
+            <TabsContent value="map" className="space-y-4">
+              <Map />
             </TabsContent>
           </Tabs>
         </div>

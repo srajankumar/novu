@@ -85,6 +85,8 @@ interface VehicleInfo {
   model: string;
   year: string;
   plateNumber: string;
+  latitude: string;
+  longitude: string;
   color: string;
 }
 
@@ -154,8 +156,9 @@ export default function VehicleTable() {
           <TableHead>Vehicle ID</TableHead>
           <TableHead>Model</TableHead>
           <TableHead>Color</TableHead>
-          <TableHead>Year</TableHead>
           <TableHead>License Plate</TableHead>
+          <TableHead>Latitude</TableHead>
+          <TableHead>Longitude</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -201,19 +204,7 @@ export default function VehicleTable() {
                 info.color
               )}
             </TableCell>
-            <TableCell>
-              {editedData._id === info._id ? (
-                <Input
-                  type="text"
-                  value={editedData.year || info.year}
-                  onChange={(e) =>
-                    setEditedData({ ...editedData, year: e.target.value })
-                  }
-                />
-              ) : (
-                info.year
-              )}
-            </TableCell>
+
             <TableCell>
               {editedData._id === info._id ? (
                 <Input
@@ -228,6 +219,38 @@ export default function VehicleTable() {
                 />
               ) : (
                 info.plateNumber
+              )}
+            </TableCell>
+            <TableCell>
+              {editedData._id === info._id ? (
+                <Input
+                  type="text"
+                  value={editedData.latitude || info.latitude}
+                  onChange={(e) =>
+                    setEditedData({
+                      ...editedData,
+                      latitude: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                info.latitude
+              )}
+            </TableCell>
+            <TableCell>
+              {editedData._id === info._id ? (
+                <Input
+                  type="text"
+                  value={editedData.longitude || info.longitude}
+                  onChange={(e) =>
+                    setEditedData({
+                      ...editedData,
+                      longitude: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                info.longitude
               )}
             </TableCell>
             <TableCell>

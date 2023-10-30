@@ -29,7 +29,9 @@
     ".next/types/**/*.ts",
     "src/app/test1/page.jsx",
     "src/components/DisplayDriver.tsx",
-    "src/components/Login.jsx"
+    "src/components/Login.jsx",
+    "src/components/dashboard/MapLocation.jsx",
+    "src/components/dashboard/Map.jsx"
   ],
   "exclude": ["node_modules"]
 }

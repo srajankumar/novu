@@ -20,10 +20,12 @@ import { useCookies } from "react-cookie";
 export default function Login() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [, setCookies] = useCookies(["access_token"]);
+  const [, setCookies] = useCookies(["access_token", "username"]);
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+    console.log("Username before API call:", username); // Log the username
+    setCookies("username", username);
     try {
       const response = await axios.post("http://localhost:3001/auth/login", {
         username,

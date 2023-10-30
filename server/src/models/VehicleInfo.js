@@ -22,6 +22,14 @@ const VehicleInfoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  latitude: {
+    type: String,
+    required: true,
+  },
+  longitude: {
+    type: String,
+    required: true,
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "drivers", // Reference to the drivers collection, assuming you have a drivers model

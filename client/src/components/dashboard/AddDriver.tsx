@@ -13,6 +13,7 @@ export default function AddDriver() {
   const [information, setInformation] = useState({
     name: "",
     birthdate: "",
+    blood: "",
     phone: "+91",
     imageUrl: "",
     license: "",
@@ -33,6 +34,7 @@ export default function AddDriver() {
     setInformation({
       name: "",
       birthdate: "",
+      blood: "",
       phone: "+91",
       imageUrl: "",
       license: "",
@@ -119,6 +121,19 @@ export default function AddDriver() {
               name="birthdate"
               onChange={handleChange}
               //   value={birthdate}
+              //   onChange={(event) => setBirthdate(event.target.value)}
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="blood">Blood Group</Label>
+            <Input
+              id="blood"
+              type="text"
+              placeholder="AB+"
+              name="blood"
+              onChange={handleChange}
+              //   value={blood}
               //   onChange={(event) => setBirthdate(event.target.value)}
             />
           </div>
