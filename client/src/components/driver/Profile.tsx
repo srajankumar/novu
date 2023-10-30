@@ -1,8 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface SavedInfoProps {
   userName: string;
@@ -13,6 +10,7 @@ export const SavedInfo: React.FC<SavedInfoProps> = ({ userName }) => {
   userName = decodeURIComponent(userName);
 
   const [information, setInformation] = useState<DriverInfo[]>([]);
+  const [displayedInfo, setDisplayedInfo] = useState<DriverInfo | null>(null);
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -28,32 +26,37 @@ export const SavedInfo: React.FC<SavedInfoProps> = ({ userName }) => {
     fetchInfo();
   }, []);
 
+  useEffect(() => {
+    // Find the first occurrence of information for the userName
+    const firstInfo = information.find((info) => info.name === userName);
+
+    if (firstInfo) {
+      setDisplayedInfo(firstInfo);
+    }
+  }, [information, userName]);
+
   return (
     <div>
-      <ul>
-        {information
-          .filter((info) => info.name === userName)
-          .map((info) => (
-            <li key={info._id} className="flex items-center space-x-10 px-20">
-              <div className="w-1/2">
-                <img
-                  src={info.imageUrl}
-                  className="rounded-full w-52"
-                  alt={info.name}
-                />
-              </div>
-              <div className="w-1/2 flex-col flex space-y-2">
-                <p>Name: {info.name}</p>
-                <p>Blood: {info.blood}</p>
-                <p>Phone: {info.phone}</p>
-                <p>Date of Birth: {info.birthdate}</p>
-                <p>License Number: {info.license}</p>
-                <p>Experience: {info.experience}</p>
-                <p>{info.bio}</p>
-              </div>
-            </li>
-          ))}
-      </ul>
+      {displayedInfo && (
+        <div className="flex items-center space-x-10 px-20">
+          <div className="w-1/2">
+            <img
+              src={displayedInfo.imageUrl}
+              className="rounded-full w-52"
+              alt={displayedInfo.name}
+            />
+          </div>
+          <div className="w-1/2 flex-col flex space-y-2">
+            <p>Name: {displayedInfo.name}</p>
+            <p>Blood: {displayedInfo.blood}</p>
+            <p>Phone: {displayedInfo.phone}</p>
+            <p>Date of Birth: {displayedInfo.birthdate}</p>
+            <p>License Number: {displayedInfo.license}</p>
+            <p>Experience: {displayedInfo.experience}</p>
+            <p>{displayedInfo.bio}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
