@@ -175,14 +175,11 @@ function Map({ fromLatitude, fromLongitude, toLatitude, toLongitude }) {
 
   useEffect(() => {
     if (!mapRef.current) {
-      // Create a map only on the client side
-      if (typeof window !== "undefined") {
-        const map = L.map("mapId").setView([fromLatitude, fromLongitude], 13);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
-          map
-        );
-        mapRef.current = map;
-      }
+      const map = L.map("mapId").setView([fromLatitude, fromLongitude], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+        map
+      );
+      mapRef.current = map;
     }
 
     const map = mapRef.current;
@@ -227,7 +224,7 @@ function Map({ fromLatitude, fromLongitude, toLatitude, toLongitude }) {
           width: 100%;
           height: 100%;
         }
-
+        
         /* Change text color to black */
         .leaflet-routing-container {
           color: black;
