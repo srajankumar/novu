@@ -28,10 +28,13 @@ export default function DriverLogin() {
     setCookies("username", username);
 
     try {
-      const response = await axios.post("http://localhost:3001/Driver/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://novu.onrender.com/Driver/login",
+        {
+          username,
+          password,
+        }
+      );
 
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);

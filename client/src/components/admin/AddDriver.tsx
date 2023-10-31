@@ -62,7 +62,7 @@ export default function AddDriver() {
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/driver/info", information);
+      await axios.post("https://novu.onrender.com/driver/info", information);
       alert("Driver Information Added");
       clearForm();
     } catch (err) {

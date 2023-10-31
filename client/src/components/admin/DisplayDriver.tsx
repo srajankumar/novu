@@ -34,7 +34,9 @@ export default function TableDemo() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/driver/info");
+        const response = await axios.get(
+          "https://novu.onrender.com/driver/info"
+        );
         setInformation(response.data);
       } catch (err) {
         console.error(err);
@@ -54,7 +56,7 @@ export default function TableDemo() {
   const handleSave = async (driverId: string) => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/driver/info/${driverId}`,
+        `https://novu.onrender.com/driver/info/${driverId}`,
         editedData
       );
 
@@ -78,7 +80,7 @@ export default function TableDemo() {
   const handleDelete = async (driverId: string) => {
     try {
       // Send a DELETE request to the server to delete the driver info
-      await axios.delete(`http://localhost:3001/driver/info/${driverId}`);
+      await axios.delete(`https://novu.onrender.com/driver/info/${driverId}`);
 
       // Update the data by removing the deleted driver
       setInformation((prevData) =>

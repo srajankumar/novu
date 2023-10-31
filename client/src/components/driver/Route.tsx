@@ -16,25 +16,84 @@ type RouteCoordinates = {
 };
 
 const routeCoordinates: RouteCoordinates = {
-  "00001": {
-    fromLatitude: 12.8854,
-    fromLongitude: 74.8417,
-    toLatitude: 12.768676,
-    toLongitude: 75.207062,
+  "1": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.9417468,
+    toLongitude: 74.8514039,
   },
-  "0002": {
-    fromLatitude: 12.8854,
-    fromLongitude: 74.8417,
-    toLatitude: 12.768676,
-    toLongitude: 75.207062,
+  "1A": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.8893897,
+    toLongitude: 74.783423,
   },
-  "0005": {
-    fromLatitude: 12.1234,
-    fromLongitude: 34.5678,
-    toLatitude: 12.4321,
-    toLongitude: 34.8765,
+  "1B": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.9075785,
+    toLongitude: 74.8249948,
   },
-  // Add more route coordinates as needed
+  "2": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 13.0217652,
+    toLongitude: 74.7903818,
+  },
+  "2A": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 13.0649255,
+    toLongitude: 74.7758675,
+  },
+  "2C": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.9605753,
+    toLongitude: 74.839527,
+  },
+  "2D": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.9679362,
+    toLongitude: 74.7142011,
+  },
+  "2E": {
+    fromLatitude: 12.8688458,
+    fromLongitude: 74.8556288,
+    toLatitude: 12.9810199,
+    toLongitude: 74.8797253,
+  },
+  "2F": {
+    fromLatitude: 12.8688458,
+    fromLongitude: 74.8556288,
+    toLatitude: 12.9810199,
+    toLongitude: 74.8797253,
+  },
+  "3": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.9285486,
+    toLongitude: 74.8786093,
+  },
+  "3A": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.9285486,
+    toLongitude: 74.8786093,
+  },
+  "3B": {
+    fromLatitude: 12.8494195,
+    fromLongitude: 74.7701654,
+    toLatitude: 12.9285486,
+    toLongitude: 74.8786093,
+  },
+  "3D": {
+    fromLatitude: 12.8630128,
+    fromLongitude: 74.8346099,
+    toLatitude: 12.9196543,
+    toLongitude: 74.8900598,
+  },
 };
 
 interface RouteMapProps {
@@ -48,7 +107,7 @@ export default function RouteMap({ userName }: RouteMapProps) {
     const fetchRouteID = async () => {
       try {
         const driverResponse = await axios.get(
-          `http://localhost:3001/driver/info?name=${userName}`
+          `https://novu.onrender.com/driver/info?name=${userName}`
         );
 
         if (driverResponse.data.length === 0) {

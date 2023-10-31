@@ -25,7 +25,9 @@ export default function VehicleTable() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/vehicle/info");
+        const response = await axios.get(
+          "https://novu.onrender.com/vehicle/info"
+        );
         setInformation(response.data);
       } catch (err) {
         console.error(err);

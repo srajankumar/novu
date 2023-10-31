@@ -25,10 +25,13 @@ export default function Login() {
     console.log("Username before API call:", username);
     setCookies("username", username);
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://novu.onrender.com/auth/login",
+        {
+          username,
+          password,
+        }
+      );
 
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);

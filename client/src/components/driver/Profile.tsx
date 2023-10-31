@@ -15,7 +15,9 @@ export const SavedInfo: React.FC<SavedInfoProps> = ({ userName }) => {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/driver/info");
+        const response = await axios.get(
+          "https://novu.onrender.com/driver/info"
+        );
         setInformation(response.data);
         console.log(response.data);
       } catch (err) {

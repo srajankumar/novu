@@ -27,7 +27,7 @@ export default function DriverRegister() {
     event.preventDefault();
 
     try {
-      await axios.post("http://localhost:3001/driver/register", {
+      await axios.post("https://novu.onrender.com/driver/register", {
         username,
         phone,
         email,

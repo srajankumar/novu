@@ -22,7 +22,7 @@ export default function RecentSales({ userName }: RecentSalesProps) {
     const fetchVehicleInfo = async () => {
       try {
         const driverResponse = await axios.get(
-          `http://localhost:3001/driver/info?name=${userName}`
+          `https://novu.onrender.com/driver/info?name=${userName}`
         );
 
         if (driverResponse.data.length === 0) {
@@ -42,7 +42,7 @@ export default function RecentSales({ userName }: RecentSalesProps) {
         const busID = matchingDriver.busID;
 
         const vehicleResponse = await axios.get(
-          `http://localhost:3001/vehicle/info`
+          `https://novu.onrender.com/vehicle/info`
         );
 
         const matchingVehicle = vehicleResponse.data.find(

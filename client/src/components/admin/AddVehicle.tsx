@@ -39,7 +39,7 @@ export default function AddVehicle() {
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/vehicle/info", vehicleInfo);
+      await axios.post("https://novu.onrender.com/vehicle/info", vehicleInfo);
       alert("Vehicle Information Added");
       clearForm();
     } catch (err) {
