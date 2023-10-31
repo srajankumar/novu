@@ -31,7 +31,9 @@
     "src/components/DisplayDriver.tsx",
     "src/components/Login.jsx",
     "src/components/dashboard/MapLocation.jsx",
-    "src/components/dashboard/Map.jsx"
+    "src/components/dashboard/Map.jsx",
+    "src/components/Route.jsx",
+    "src/components/Route.jsx"
   ],
   "exclude": ["node_modules"]
 }

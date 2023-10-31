@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 
 import Map from "@/components/dashboard/Map";
 
+import GoogleMap from "@/components/dashboard/MapRoute";
+
 import { useCookies } from "react-cookie";
 
 interface DriverInfo {

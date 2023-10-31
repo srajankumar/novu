@@ -27,6 +27,7 @@ import Schedule from "@/components/driver/Schedule";
 import Vehicle from "@/components/driver/Vehicle";
 
 import Map from "@/components/driver/Map";
+import RouteMap from "@/components/Route";
 
 import ThemeToggle from "@/components/ThemeToggle";
 import DriverAuthButton from "@/components/ui/DriverAuthButton";
@@ -64,7 +65,8 @@ export default function DashboardPage() {
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="map">Map</TabsTrigger>
+              <TabsTrigger value="route">Route</TabsTrigger>
+              <TabsTrigger value="parking">Parking</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -94,7 +96,10 @@ export default function DashboardPage() {
                 </Card>
               </div>
             </TabsContent>
-            <TabsContent value="map" className="space-y-4">
+            <TabsContent value="route" className="space-y-4">
+              <RouteMap userName={loginName} />
+            </TabsContent>
+            <TabsContent value="parking" className="space-y-4">
               <Map userName={loginName} />
             </TabsContent>
           </Tabs>
