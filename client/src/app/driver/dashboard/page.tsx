@@ -1,38 +1,17 @@
 "use client";
-import { Metadata } from "next";
-import Image from "next/image";
-
 import { useCookies } from "react-cookie";
 
-import { Button } from "@/components/ui//button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui//tabs";
-import { CalendarDateRangePicker } from "@/components/dashboard/date-range-picker";
+import ThemeToggle from "@/components/ThemeToggle";
 
-import { Overview } from "@/components/dashboard/overview";
-import { RecentSales } from "@/components/dashboard/recent-sales";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 
 import Schedule from "@/components/driver/Schedule";
 import Vehicle from "@/components/driver/Vehicle";
-
 import Map from "@/components/driver/Map";
-import RouteMap from "@/components/Route";
-
-import ThemeToggle from "@/components/ThemeToggle";
-import DriverAuthButton from "@/components/ui/DriverAuthButton";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import RouteMap from "@/components/driver/Route";
+import DriverAuthButton from "@/components/driver/DriverAuthButton";
 import { SavedInfo } from "@/components/driver/Profile";
 
 export default function DashboardPage() {

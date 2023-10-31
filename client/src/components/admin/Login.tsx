@@ -1,11 +1,9 @@
 "use client";
 
-// import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -24,7 +22,7 @@ export default function Login() {
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log("Username before API call:", username); // Log the username
+    console.log("Username before API call:", username);
     setCookies("username", username);
     try {
       const response = await axios.post("http://localhost:3001/auth/login", {

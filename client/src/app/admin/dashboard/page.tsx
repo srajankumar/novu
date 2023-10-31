@@ -1,14 +1,6 @@
 "use client";
-// import { Metadata } from "next";
-import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-import Map from "@/components/dashboard/Map";
-
-import GoogleMap from "@/components/dashboard/MapRoute";
-
 import { useCookies } from "react-cookie";
 
 interface DriverInfo {
@@ -18,7 +10,6 @@ interface DriverInfo {
   imageUrl: string;
   busID: string;
   routeID: string;
-  // Add other properties as needed
 }
 
 interface VehicleInfo {
@@ -28,10 +19,10 @@ interface VehicleInfo {
   year: string;
   plateNumber: string;
   color: string;
-  // Add other properties as needed
 }
 
-import { Button } from "@/components/ui//button";
+import ThemeToggle from "@/components/ThemeToggle";
+
 import {
   Card,
   CardContent,
@@ -39,23 +30,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui//tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 
-import { CalendarDateRangePicker } from "@/components/dashboard/date-range-picker";
-import { Overview } from "@/components/dashboard/overview";
-import { RecentSales } from "@/components/dashboard/recent-sales";
-import ThemeToggle from "@/components/ThemeToggle";
-import AuthButton from "@/components/dashboard/AuthButton";
+import Map from "@/components/admin/Map";
 
-import AddDriver from "@/components/dashboard/AddDriver";
-import DisplayDriver from "@/components/dashboard/DisplayDriver";
-import DisplayVehicle from "@/components/dashboard/DisplayVehicle";
-import AddVehicle from "@/components/dashboard/AddVehicle";
+import { Overview } from "@/components/admin/overview";
+import { RecentSales } from "@/components/admin/recent-sales";
+import AuthButton from "@/components/admin/AuthButton";
+import AddDriver from "@/components/admin/AddDriver";
+import DisplayDriver from "@/components/admin/DisplayDriver";
+import DisplayVehicle from "@/components/admin/DisplayVehicle";
+import AddVehicle from "@/components/admin/AddVehicle";
 
 export default function DashboardPage() {
   const [driverInformation, setDriverInformation] = useState<DriverInfo[]>([]);
@@ -78,7 +64,7 @@ export default function DashboardPage() {
 
     const fetchVehicleInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/vehicle/info"); // Adjust the URL
+        const response = await axios.get("http://localhost:3001/vehicle/info");
         setVehicleInformation(response.data);
         console.log(response.data);
       } catch (err) {
@@ -142,9 +128,6 @@ export default function DashboardPage() {
                     <div className="text-2xl font-bold">
                       {userName || "User"}
                     </div>
-                    {/* <p className="text-xs text-muted-foreground">
-                      +201 since last hour
-                    </p> */}
                   </CardContent>
                 </Card>
                 <Card>
@@ -172,9 +155,6 @@ export default function DashboardPage() {
                     <div className="text-2xl font-bold">
                       {driverInformation.length}
                     </div>
-                    {/* <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p> */}
                   </CardContent>
                 </Card>
                 <Card>
@@ -198,12 +178,8 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">
-                      {" "}
                       {vehicleInformation.length}
                     </div>
-                    {/* <p className="text-xs text-muted-foreground">
-                      +180.1% from last month
-                    </p> */}
                   </CardContent>
                 </Card>
                 <Card>
@@ -228,9 +204,6 @@ export default function DashboardPage() {
                     <div className="text-2xl font-bold">
                       {driversWithBusIDZero.length}
                     </div>
-                    {/* <p className="text-xs text-muted-foreground">
-                      +19% from last month
-                    </p> */}
                   </CardContent>
                 </Card>
               </div>

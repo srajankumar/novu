@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import MapLocation from "@/components/dashboard/MapLocation";
+import MapLocation from "@/components/common/MapLocation";
 
 interface VehicleInfo {
   _id: string;

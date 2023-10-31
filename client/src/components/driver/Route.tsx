@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 
-const GoogleMap = dynamic(() => import("@/components/dashboard/MapRoute"), {
+const GoogleMap = dynamic(() => import("@/components/driver/MapRoute"), {
   ssr: false,
 });
 

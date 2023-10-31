@@ -1,4 +1,4 @@
-import DriverLogin from "@/components/DriverLogin";
+import DriverLogin from "@/components/driver/DriverLogin";
 import React from "react";
 
 const page = () => {

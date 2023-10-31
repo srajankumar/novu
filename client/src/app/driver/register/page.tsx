@@ -1,4 +1,4 @@
-import DriverRegister from "@/components/DriverRegister";
+import DriverRegister from "@/components/driver/DriverRegister";
 import React from "react";
 
 const page = () => {
