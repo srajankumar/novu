@@ -43,29 +43,27 @@ export default function RouteMap({ userName }: RouteMapProps) {
   useEffect(() => {
     const fetchRouteID = async () => {
       try {
-        if (typeof window !== "undefined") {
-          const driverResponse = await axios.get(
-            `http://localhost:3001/driver/info?name=${userName}`
-          );
+        const driverResponse = await axios.get(
+          `http://localhost:3001/driver/info?name=${userName}`
+        );
 
-          if (driverResponse.data.length === 0) {
-            console.log("Driver not found");
-            return;
-          }
-
-          const matchingDriver = driverResponse.data.find(
-            (driver: { name: string }) => driver.name === userName
-          );
-
-          if (!matchingDriver) {
-            console.log("Driver not found");
-            return;
-          }
-
-          const driverRouteID = matchingDriver.routeID;
-
-          setRouteID(driverRouteID);
+        if (driverResponse.data.length === 0) {
+          console.log("Driver not found");
+          return;
         }
+
+        const matchingDriver = driverResponse.data.find(
+          (driver: { name: string }) => driver.name === userName
+        );
+
+        if (!matchingDriver) {
+          console.log("Driver not found");
+          return;
+        }
+
+        const driverRouteID = matchingDriver.routeID;
+
+        setRouteID(driverRouteID);
       } catch (err) {
         console.error(err);
       }
