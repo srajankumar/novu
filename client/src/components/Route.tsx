@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GoogleMap from "@/components/dashboard/MapRoute";
 
-const routeCoordinates = {
+type RouteCoordinates = {
+  [key: string]: {
+    fromLatitude: number;
+    fromLongitude: number;
+    toLatitude: number;
+    toLongitude: number;
+  };
+};
+
+const routeCoordinates: RouteCoordinates = {
   "00001": {
     fromLatitude: 12.8854,
     fromLongitude: 74.8417,
@@ -63,7 +72,7 @@ export default function RouteMap({ userName }: RouteMapProps) {
     fetchRouteID();
   }, [userName]);
 
-  const routeInformation = routeCoordinates[routeID];
+  const routeInformation = routeID ? routeCoordinates[routeID] : null;
 
   return (
     <div>
