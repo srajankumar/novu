@@ -54,7 +54,7 @@ export default function Login() {
             <Input
               id="username"
               type="text"
-              placeholder="Username"
+              placeholder="John Miller"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />

@@ -57,7 +57,7 @@ export default function DriverLogin() {
             <Input
               id="username"
               type="text"
-              placeholder="Username"
+              placeholder="Chiara Rossi"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />

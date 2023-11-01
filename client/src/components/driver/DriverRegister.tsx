@@ -52,7 +52,7 @@ export default function DriverRegister() {
             <Input
               id="username"
               type="text"
-              placeholder="Full Name"
+              placeholder="Chiara Rossi"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
@@ -62,7 +62,7 @@ export default function DriverRegister() {
             <Input
               id="phone"
               type="number"
-              placeholder="Your ten digit mobile number"
+              placeholder="9998887777"
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
             />
@@ -72,7 +72,7 @@ export default function DriverRegister() {
             <Input
               id="email"
               type="email"
-              placeholder="m@example.com"
+              placeholder="chiara.rossi@example.com"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -82,7 +82,7 @@ export default function DriverRegister() {
             <Input
               id="password"
               type="password"
-              placeholder="Strong Password"
+              placeholder="A Strong Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
@@ -95,7 +95,7 @@ export default function DriverRegister() {
             </Button>
             <div className="space-x-2 text-sm">
               <span>Already have an account?</span>
-              <Link href="/login" className="hover:underline">
+              <Link href="/driver/login" className="hover:underline">
                 Login
               </Link>
             </div>

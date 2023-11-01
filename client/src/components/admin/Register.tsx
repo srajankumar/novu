@@ -56,11 +56,11 @@ export default function Register() {
         </CardHeader>
         <CardContent className="grid w-96 gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="username">Name</Label>
+            <Label htmlFor="username">Username</Label>
             <Input
               id="username"
               type="text"
-              placeholder="Full Name"
+              placeholder="John Miller"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
@@ -70,7 +70,7 @@ export default function Register() {
             <Input
               id="phone"
               type="number"
-              placeholder="Your ten digit mobile number"
+              placeholder="6665554444"
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
             />
@@ -80,7 +80,7 @@ export default function Register() {
             <Input
               id="email"
               type="email"
-              placeholder="m@example.com"
+              placeholder="john.miller@example.com"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -90,7 +90,7 @@ export default function Register() {
             <Input
               id="password"
               type="password"
-              placeholder="Strong Password"
+              placeholder="A Strong Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
