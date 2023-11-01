@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import { useGetDriverID } from "@/hooks/useGetDriverID";
@@ -14,7 +13,7 @@ export default function AddDriver() {
     name: "",
     birthdate: "",
     blood: "",
-    phone: "+91",
+    phone: "",
     imageUrl: "",
     license: "",
     busID: "",
@@ -26,7 +25,7 @@ export default function AddDriver() {
     email: "",
     username: "",
     password: "",
-
+    time: "",
     userOwner: driverID,
   });
 
@@ -35,7 +34,7 @@ export default function AddDriver() {
       name: "",
       birthdate: "",
       blood: "",
-      phone: "+91",
+      phone: "",
       imageUrl: "",
       license: "",
       busID: "",
@@ -47,7 +46,7 @@ export default function AddDriver() {
       email: "",
       username: "",
       password: "",
-
+      time: "",
       userOwner: driverID,
     });
   };
@@ -65,6 +64,7 @@ export default function AddDriver() {
       await axios.post("https://novu.onrender.com/driver/info", information);
       alert("Driver Information Added");
       clearForm();
+      console.log(information);
     } catch (err) {
       console.error(err);
     }
@@ -76,164 +76,163 @@ export default function AddDriver() {
         <div className="text-2xl font-bold py-10">Add Driver</div>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="username">Name</Label>
+            <Label htmlFor="username">Full Name</Label>
             <Input
+              value={information.name}
               id="username"
               type="text"
-              placeholder="Full Name"
+              placeholder="Chiara Rossi"
               name="name"
               onChange={handleChange}
-              //   value={username}
-              //   onChange={(event) => setUsername(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="phone">Phone</Label>
             <Input
+              value={information.phone}
               id="phone"
               type="number"
-              placeholder="Your ten-digit mobile number"
+              placeholder="9998887777"
               name="phone"
               onChange={handleChange}
-              //   value={phone}
-              //   onChange={(event) => setPhone(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
+              value={information.email}
               id="email"
               type="email"
-              placeholder="m@example.com"
+              placeholder="chiara.rossi@example.com"
               name="email"
               onChange={handleChange}
-              //   value={email}
-              //   onChange={(event) => setEmail(event.target.value)}
             />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="birthdate">Birthdate</Label>
             <Input
+              value={information.birthdate}
               id="birthdate"
               type="text"
-              placeholder="YYYY-MM-DD"
+              placeholder="1985-08-27"
               name="birthdate"
               onChange={handleChange}
-              //   value={birthdate}
-              //   onChange={(event) => setBirthdate(event.target.value)}
             />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="blood">Blood Group</Label>
             <Input
+              value={information.blood}
               id="blood"
               type="text"
-              placeholder="AB+"
+              placeholder="A-"
               name="blood"
               onChange={handleChange}
-              //   value={blood}
-              //   onChange={(event) => setBirthdate(event.target.value)}
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="license">License Number</Label>
+            <Input
+              value={information.license}
+              id="license"
+              type="text"
+              placeholder="DL876543"
+              name="license"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="experience">Experience ( in years )</Label>
+            <Input
+              value={information.experience}
+              id="experience"
+              type="number"
+              placeholder="6"
+              name="experience"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="bio">Bio</Label>
+            <Textarea
+              value={information.bio}
+              id="bio"
+              placeholder="Chiara Rossi is an experienced bus driver with 6 years of service in the industry. She takes pride in her safe and reliable driving and is dedicated to providing passengers with a comfortable and secure journey."
+              name="bio"
+              onChange={handleChange}
             />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="imageUrl">Image URL</Label>
             <Input
+              value={information.imageUrl}
               id="imageUrl"
               type="text"
-              placeholder="Image URL"
+              placeholder="https://example.com/chiara_rossi.jpg"
               name="imageUrl"
               onChange={handleChange}
-              //   value={imageUrl}
-              //   onChange={(event) => setImageUrl(event.target.value)}
             />
           </div>
+
           <div className="grid gap-2">
-            <Label htmlFor="license">License Number</Label>
+            <Label htmlFor="busID">Vehicle ID</Label>
             <Input
-              id="license"
-              type="text"
-              placeholder="Driver's License"
-              name="license"
-              onChange={handleChange}
-              //   value={license}
-              //   onChange={(event) => setLicense(event.target.value)}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="busID">Bus ID</Label>
-            <Input
+              value={information.busID}
               id="busID"
               type="text"
-              placeholder="Bus ID"
+              placeholder="0001"
               name="busID"
               onChange={handleChange}
-              //   value={busID}
-              //   onChange={(event) => setBusID(event.target.value)}
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="routeID">Route ID</Label>
             <Input
+              value={information.routeID}
               id="routeID"
               type="text"
-              placeholder="Route ID"
+              placeholder="3A"
               name="routeID"
               onChange={handleChange}
-              //   value={routeID}
-              //   onChange={(event) => setRouteID(event.target.value)}
             />
           </div>
 
+          <div className="gap-2 grid">
+            <Label htmlFor="latitude">Route</Label>
+            <div className="flex gap-4">
+              <Input
+                value={information.from}
+                id="from"
+                type="text"
+                placeholder="From"
+                name="from"
+                onChange={handleChange}
+              />
+              <Input
+                value={information.to}
+                id="to"
+                type="text"
+                placeholder="To"
+                name="to"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
           <div className="grid gap-2">
-            <Label htmlFor="from">From</Label>
+            <Label htmlFor="time">Timings</Label>
             <Input
-              id="from"
+              value={information.time}
+              id="time"
               type="text"
-              placeholder="From"
-              name="from"
+              placeholder="9:00 - 10:30"
+              name="time"
               onChange={handleChange}
-              //   value={routeID}
-              //   onChange={(event) => setRouteID(event.target.value)}
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="routeID">To</Label>
-            <Input
-              id="to"
-              type="text"
-              placeholder="To"
-              name="to"
-              onChange={handleChange}
-              //   value={routeID}
-              //   onChange={(event) => setRouteID(event.target.value)}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="experience">Experience (years)</Label>
-            <Input
-              id="experience"
-              type="number"
-              placeholder="Years of Experience"
-              name="experience"
-              onChange={handleChange}
-              //   value={experience}
-              //   onChange={(event) => setExperience(event.target.value)}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="bio">Bio</Label>
-
-            <Textarea
-              id="bio"
-              placeholder="Driver's Bio"
-              name="bio"
-              onChange={handleChange}
-              //   value={bio}
-              //   onChange={(event) => setBio(event.target.value)}
             />
           </div>
 

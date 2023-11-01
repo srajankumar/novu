@@ -11,6 +11,7 @@ interface DriverInfo {
   routeID: string;
   from: string;
   to: string;
+  time: string;
 }
 
 export function RecentSales() {
@@ -44,7 +45,7 @@ export function RecentSales() {
           </Avatar>
           <div className="ml-4 space-y-1">
             <p className="text-sm font-medium leading-none">{info.name}</p>
-            <p className="text-sm text-muted-foreground">{info.phone}</p>
+            <p className="text-sm text-muted-foreground">{info.time}</p>
           </div>
           <div className="ml-auto flex items-center font-medium">
             {info.from}{" "}

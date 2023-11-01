@@ -13,6 +13,7 @@ import Map from "@/components/driver/Map";
 import RouteMap from "@/components/driver/Route";
 import DriverAuthButton from "@/components/driver/DriverAuthButton";
 import { SavedInfo } from "@/components/driver/Profile";
+import { Bio } from "@/components/driver/Bio";
 
 export default function DashboardPage() {
   const [cookies] = useCookies(["username"]);
@@ -62,6 +63,14 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardContent>
                     <Vehicle userName={loginName} />
+                  </CardContent>
+                </Card>
+                <Card className="col-span-4 lg:col-span-4">
+                  <CardHeader>
+                    <CardTitle>Bio</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Bio userName={loginName} />
                   </CardContent>
                 </Card>
               </div>

@@ -55,7 +55,7 @@ export const SavedInfo: React.FC<SavedInfoProps> = ({ userName }) => {
             <p>Date of Birth: {displayedInfo.birthdate}</p>
             <p>License Number: {displayedInfo.license}</p>
             <p>Experience: {displayedInfo.experience}</p>
-            <p>{displayedInfo.bio}</p>
+            {/* <p>{displayedInfo.bio}</p> */}
           </div>
         </div>
       )}

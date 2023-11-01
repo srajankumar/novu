@@ -158,7 +158,7 @@ export default function VehicleTable() {
           <TableHead>Vehicle ID</TableHead>
           <TableHead>Model</TableHead>
           <TableHead>Color</TableHead>
-          <TableHead>License Plate</TableHead>
+          <TableHead>Plate Number</TableHead>
           <TableHead>Latitude</TableHead>
           <TableHead>Longitude</TableHead>
           <TableHead>Actions</TableHead>

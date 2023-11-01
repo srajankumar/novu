@@ -55,9 +55,10 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="vehicleID">Vehicle ID</Label>
             <Input
+              value={vehicleInfo.vehicleID}
               id="vehicleID"
               type="text"
-              placeholder="Vehicle ID"
+              placeholder="0001"
               name="vehicleID"
               onChange={handleChange}
             />
@@ -65,9 +66,10 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="model">Model</Label>
             <Input
+              value={vehicleInfo.model}
               id="model"
               type="text"
-              placeholder="Vehicle Model"
+              placeholder="Toyota Hiace"
               name="model"
               onChange={handleChange}
             />
@@ -75,9 +77,10 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="year">Year</Label>
             <Input
+              value={vehicleInfo.year}
               id="year"
               type="number"
-              placeholder="Vehicle Year"
+              placeholder="2022"
               name="year"
               onChange={handleChange}
             />
@@ -85,9 +88,10 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="plateNumber">Plate Number</Label>
             <Input
+              value={vehicleInfo.plateNumber}
               id="plateNumber"
               type="text"
-              placeholder="Vehicle Plate Number"
+              placeholder="KA 19 AB 1234"
               name="plateNumber"
               onChange={handleChange}
             />
@@ -95,33 +99,35 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="color">Color</Label>
             <Input
+              value={vehicleInfo.color}
               id="color"
               type="text"
-              placeholder="Vehicle Color"
+              placeholder="White"
               name="color"
               onChange={handleChange}
             />
           </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="latitude">Latitude</Label>
-            <Input
-              id="latitude"
-              type="text"
-              placeholder="Latitude"
-              name="latitude"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="longitude">Longitude</Label>
-            <Input
-              id="longitude"
-              type="text"
-              placeholder="Longitude"
-              name="longitude"
-              onChange={handleChange}
-            />
+          <div className="gap-2 grid">
+            <Label htmlFor="latitude">Parking Location</Label>
+            <div className="flex gap-4">
+              <Input
+                value={vehicleInfo.latitude}
+                id="latitude"
+                type="text"
+                placeholder="Latitude"
+                name="latitude"
+                onChange={handleChange}
+              />
+              <Input
+                value={vehicleInfo.longitude}
+                id="longitude"
+                type="text"
+                placeholder="Longitude"
+                name="longitude"
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           <div className="grid gap-2">

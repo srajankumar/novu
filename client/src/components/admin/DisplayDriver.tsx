@@ -24,7 +24,7 @@ interface DriverInfo {
   routeID: string;
   from: string;
   to: string;
-  // Add other fields here
+  time: string;
 }
 
 export default function TableDemo() {
@@ -102,6 +102,7 @@ export default function TableDemo() {
           <TableHead>Route ID</TableHead>
           <TableHead>From</TableHead>
           <TableHead>To</TableHead>
+          <TableHead>Timings</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -114,19 +115,7 @@ export default function TableDemo() {
                 <AvatarFallback>{info.name}</AvatarFallback>
               </Avatar>
             </TableCell>
-            {/* <TableCell>
-              {editedData._id === info._id ? (
-                <input
-                  type="text"
-                  value={editedData.name || info.name}
-                  onChange={(e) =>
-                    setEditedData({ ...editedData, name: e.target.value })
-                  }
-                />
-              ) : (
-                info.name
-              )}
-            </TableCell> */}
+
             <TableCell>{info.name}</TableCell>
             <TableCell>
               {editedData._id === info._id ? (
@@ -195,6 +184,19 @@ export default function TableDemo() {
             </TableCell>
             <TableCell>
               {editedData._id === info._id ? (
+                <Input
+                  type="text"
+                  value={editedData.time || info.time}
+                  onChange={(e) =>
+                    setEditedData({ ...editedData, time: e.target.value })
+                  }
+                />
+              ) : (
+                info.time
+              )}
+            </TableCell>
+            <TableCell>
+              {editedData._id === info._id ? (
                 <div className="flex space-x-5">
                   <button onClick={() => handleSave(info._id)}>
                     <Save className="w-5 h-5" />
@@ -214,6 +216,7 @@ export default function TableDemo() {
                 </div>
               )}
             </TableCell>
+
             {/* <TableCell>
               <button onClick={() => handleDelete(info._id)}>
                 <Trash className="w-5 h-5" />
