@@ -54,7 +54,9 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchDriverInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/driver/info");
+        const response = await axios.get(
+          "https://novu.onrender.com/driver/info"
+        );
         setDriverInformation(response.data);
         console.log(response.data);
       } catch (err) {
@@ -64,7 +66,9 @@ export default function DashboardPage() {
 
     const fetchVehicleInfo = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/vehicle/info");
+        const response = await axios.get(
+          "https://novu.onrender.com/vehicle/info"
+        );
         setVehicleInformation(response.data);
         console.log(response.data);
       } catch (err) {
