@@ -15,6 +15,8 @@ import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
 import { useCookies } from "react-cookie";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 export default function Login() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -22,16 +24,13 @@ export default function Login() {
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log("Username before API call:", username);
     setCookies("username", username);
+    console.log("API request sent!");
     try {
-      const response = await axios.post(
-        "https://novu.onrender.com/auth/login",
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`${serverUrl}/auth/login`, {
+        username,
+        password,
+      });
 
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);

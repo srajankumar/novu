@@ -3,6 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface DriverInfo {
   _id: string;
   name: string;
@@ -54,11 +56,9 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchDriverInfo = async () => {
       try {
-        const response = await axios.get(
-          "https://novu.onrender.com/driver/info"
-        );
+        const response = await axios.get(`${serverUrl}/driver/info`);
         setDriverInformation(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         console.error(err);
       }
@@ -66,11 +66,9 @@ export default function DashboardPage() {
 
     const fetchVehicleInfo = async () => {
       try {
-        const response = await axios.get(
-          "https://novu.onrender.com/vehicle/info"
-        );
+        const response = await axios.get(`${serverUrl}/vehicle/info`);
         setVehicleInformation(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         console.error(err);
       }

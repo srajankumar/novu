@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MapLocation from "@/components/common/MapLocation";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface VehicleInfo {
   _id: string;
   vehicleID: string;
@@ -25,7 +27,7 @@ export default function RecentSales({ userName }: RecentSalesProps) {
     const fetchVehicleInfo = async () => {
       try {
         const driverResponse = await axios.get(
-          `https://novu.onrender.com/driver/info?name=${userName}`
+          `${serverUrl}/driver/info?name=${userName}`
         );
 
         if (driverResponse.data.length === 0) {
@@ -44,9 +46,7 @@ export default function RecentSales({ userName }: RecentSalesProps) {
 
         const busID = matchingDriver.busID;
 
-        const vehicleResponse = await axios.get(
-          `https://novu.onrender.com/vehicle/info`
-        );
+        const vehicleResponse = await axios.get(`${serverUrl}/vehicle/info`);
 
         const matchingVehicle = vehicleResponse.data.find(
           (vehicle: VehicleInfo) => vehicle.vehicleID === busID

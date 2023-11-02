@@ -1,21 +1,21 @@
 "use client";
 
-// import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
-
 import axios from "axios";
+
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export default function DriverRegister() {
   const [email, setEmail] = useState("");
@@ -27,7 +27,7 @@ export default function DriverRegister() {
     event.preventDefault();
 
     try {
-      await axios.post("https://novu.onrender.com/driver/register", {
+      await axios.post(`${serverUrl}/driver/register`, {
         username,
         phone,
         email,

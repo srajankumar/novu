@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface SavedInfoProps {
   userName: string;
 }
@@ -15,11 +17,9 @@ export const SavedInfo: React.FC<SavedInfoProps> = ({ userName }) => {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(
-          "https://novu.onrender.com/driver/info"
-        );
+        const response = await axios.get(`${serverUrl}/driver/info`);
         setInformation(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         console.error(err);
       }

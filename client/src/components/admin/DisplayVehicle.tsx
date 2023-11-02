@@ -1,69 +1,3 @@
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-
-// import {
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableHead,
-//   TableHeader,
-//   TableRow,
-// } from "@/components/ui/table";
-
-// interface VehicleInfo {
-//   _id: string;
-//   vehicleID: string;
-//   model: string;
-//   year: string;
-//   plateNumber: string;
-//   color: string;
-// }
-
-// export default function TableVehicles() {
-//   const [vehicleInformation, setVehicleInformation] = useState<VehicleInfo[]>(
-//     []
-//   );
-
-//   useEffect(() => {
-//     const fetchVehicleInfo = async () => {
-//       try {
-//         const response = await axios.get("https://novu.onrender.com/vehicle/info");
-//         setVehicleInformation(response.data);
-//         console.log(response.data);
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     };
-
-//     fetchVehicleInfo();
-//   }, []);
-
-//   return (
-//     <Table>
-//       <TableHeader>
-//         <TableRow>
-//           <TableHead>Vehicle ID</TableHead>
-//           <TableHead>Model</TableHead>
-//           <TableHead>Year</TableHead>
-//           <TableHead>Plate Number</TableHead>
-//           <TableHead>Color</TableHead>
-//         </TableRow>
-//       </TableHeader>
-//       <TableBody>
-//         {vehicleInformation.map((info) => (
-//           <TableRow key={info._id}>
-//             <TableCell>{info.vehicleID}</TableCell>
-//             <TableCell>{info.model}</TableCell>
-//             <TableCell>{info.year}</TableCell>
-//             <TableCell>{info.plateNumber}</TableCell>
-//             <TableCell>{info.color}</TableCell>
-//           </TableRow>
-//         ))}
-//       </TableBody>
-//     </Table>
-//   );
-// }
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -78,6 +12,8 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
+
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 interface VehicleInfo {
   _id: string;
@@ -97,9 +33,7 @@ export default function VehicleTable() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(
-          "https://novu.onrender.com/vehicle/info"
-        );
+        const response = await axios.get(`${serverUrl}/vehicle/info`);
         setInformation(response.data);
       } catch (err) {
         console.error(err);
@@ -119,7 +53,7 @@ export default function VehicleTable() {
   const handleSave = async (vehicleId: string) => {
     try {
       const response = await axios.put(
-        `https://novu.onrender.com/vehicle/info/${vehicleId}`,
+        `${serverUrl}/vehicle/info/${vehicleId}`,
         editedData
       );
 
@@ -140,7 +74,7 @@ export default function VehicleTable() {
   const handleDelete = async (vehicleId: string) => {
     try {
       // Send a DELETE request to the server to delete the driver info
-      await axios.delete(`https://novu.onrender.com/vehicle/info/${vehicleId}`);
+      await axios.delete(`${serverUrl}/vehicle/info/${vehicleId}`);
 
       // Update the data by removing the deleted driver
       setInformation((prevData) =>

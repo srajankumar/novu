@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MapLocation from "../common/MapLocation";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface VehicleInfo {
   _id: string;
   vehicleID: string;
@@ -25,9 +27,7 @@ export default function VehicleTable() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(
-          "https://novu.onrender.com/vehicle/info"
-        );
+        const response = await axios.get(`${serverUrl}/vehicle/info`);
         setInformation(response.data);
       } catch (err) {
         console.error(err);

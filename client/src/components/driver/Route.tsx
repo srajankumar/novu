@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 const GoogleMap = dynamic(() => import("@/components/driver/MapRoute"), {
   ssr: false,
 });
@@ -107,7 +109,7 @@ export default function RouteMap({ userName }: RouteMapProps) {
     const fetchRouteID = async () => {
       try {
         const driverResponse = await axios.get(
-          `https://novu.onrender.com/driver/info?name=${userName}`
+          `${serverUrl}/driver/info?name=${userName}`
         );
 
         if (driverResponse.data.length === 0) {

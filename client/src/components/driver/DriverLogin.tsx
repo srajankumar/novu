@@ -1,6 +1,5 @@
 "use client";
 
-// import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,6 +16,8 @@ import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
 import { useCookies } from "react-cookie";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 export default function DriverLogin() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -24,17 +25,13 @@ export default function DriverLogin() {
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    console.log("Username before API call:", username); // Log the username
     setCookies("username", username);
-
+    console.log("API request sent!");
     try {
-      const response = await axios.post(
-        "https://novu.onrender.com/Driver/login",
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`${serverUrl}/Driver/login`, {
+        username,
+        password,
+      });
 
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);

@@ -1,11 +1,9 @@
 "use client";
 
-// import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -14,8 +12,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { SyntheticEvent, useState } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
+
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -23,19 +22,11 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const router = useRouter();
-  // const navigate = () => {
-  //   router.push("/login");
-  // };
-
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    // if (password !== confirmPassword) {
-    //   alert("Passwords do not match!");
-    //   return;
-    // }
+
     try {
-      await axios.post("https://novu.onrender.com/auth/register", {
+      await axios.post(`${serverUrl}/auth/register`, {
         username,
         phone,
         email,

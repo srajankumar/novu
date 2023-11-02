@@ -2,6 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface DriverInfo {
   _id: string;
   name: string;
@@ -24,9 +26,7 @@ export default function RecentSales({ userName }: RecentSalesProps) {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(
-          "https://novu.onrender.com/driver/info"
-        );
+        const response = await axios.get(`${serverUrl}/driver/info`);
         setInformation(response.data);
       } catch (err) {
         console.error(err);

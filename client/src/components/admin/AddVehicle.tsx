@@ -5,6 +5,8 @@ import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import { useGetDriverID } from "@/hooks/useGetDriverID";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 export default function AddVehicle() {
   const driverID = useGetDriverID();
   const [vehicleInfo, setVehicleInfo] = useState({
@@ -39,7 +41,7 @@ export default function AddVehicle() {
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      await axios.post("https://novu.onrender.com/vehicle/info", vehicleInfo);
+      await axios.post(`${serverUrl}/vehicle/info`, vehicleInfo);
       alert("Vehicle Information Added");
       clearForm();
     } catch (err) {

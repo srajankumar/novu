@@ -15,6 +15,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Input } from "@/components/ui/input";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 interface DriverInfo {
   _id: string;
   name: string;
@@ -34,9 +36,7 @@ export default function TableDemo() {
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(
-          "https://novu.onrender.com/driver/info"
-        );
+        const response = await axios.get(`${serverUrl}/driver/info`);
         setInformation(response.data);
       } catch (err) {
         console.error(err);
@@ -56,7 +56,7 @@ export default function TableDemo() {
   const handleSave = async (driverId: string) => {
     try {
       const response = await axios.put(
-        `https://novu.onrender.com/driver/info/${driverId}`,
+        `${serverUrl}/driver/info/${driverId}`,
         editedData
       );
 
@@ -80,7 +80,7 @@ export default function TableDemo() {
   const handleDelete = async (driverId: string) => {
     try {
       // Send a DELETE request to the server to delete the driver info
-      await axios.delete(`https://novu.onrender.com/driver/info/${driverId}`);
+      await axios.delete(`${serverUrl}/driver/info/${driverId}`);
 
       // Update the data by removing the deleted driver
       setInformation((prevData) =>
