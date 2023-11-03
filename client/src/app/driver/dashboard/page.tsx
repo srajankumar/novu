@@ -20,15 +20,17 @@ export default function DashboardPage() {
   const loginName = cookies.username;
   return (
     <>
-      <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
+      {/* <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
         <h1>Not Supported</h1>
-      </div>
-      <div className="hidden flex-col md:flex">
+      </div> */}
+      <div className="flex-col flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
-              <CalendarDateRangePicker />
+              <div className="md:flex hidden">
+                <CalendarDateRangePicker />
+              </div>
               <ThemeToggle />
               <DriverAuthButton />
             </div>

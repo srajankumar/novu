@@ -84,27 +84,53 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
+      {/* <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
         <h1>Not Supported</h1>
-      </div>
-      <div className="hidden flex-col md:flex">
+      </div> */}
+      <div className="flex-col flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
-              <CalendarDateRangePicker />
+              <div className="md:flex hidden">
+                <CalendarDateRangePicker />
+              </div>
               <AuthButton />
               <ThemeToggle />
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="adddrivers">Add Drivers</TabsTrigger>
-              <TabsTrigger value="drivers">Drivers</TabsTrigger>
-              <TabsTrigger value="addvehicles">Add Vehicles</TabsTrigger>
-              <TabsTrigger value="vehicles">Vehicles</TabsTrigger>
-              <TabsTrigger value="map">Map</TabsTrigger>
+            <TabsList className="md:flex md:text-xl md:justify-start grid grid-cols-3 md:pb-1 pb-[5.2rem] md:px-1 px-2">
+              <TabsTrigger
+                className="md:my-0 my-1 mr-1 md:mr-0"
+                value="overview"
+              >
+                Overview
+              </TabsTrigger>
+              <TabsTrigger
+                className="md:my-0 my-1 mr-1 md:mr-0"
+                value="adddrivers"
+              >
+                Add Drivers
+              </TabsTrigger>
+              <TabsTrigger className="md:my-0 my-1" value="drivers">
+                Drivers
+              </TabsTrigger>
+              <TabsTrigger
+                className="md:my-0 my-1 mr-1 md:mr-0"
+                value="addvehicles"
+              >
+                Add Vehicles
+              </TabsTrigger>
+              <TabsTrigger
+                className="md:my-0 my-1 mr-1 md:mr-0"
+                value="vehicles"
+              >
+                Vehicles
+              </TabsTrigger>
+              <TabsTrigger className="md:my-0 my-1" value="map">
+                Map
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

@@ -50,7 +50,7 @@ export default function VehicleTable() {
   return (
     <div>
       <select
-        className="border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 mb-5 mt-2"
+        className="border border-input text-xs md:text-base bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 mb-5 mt-2"
         id="vehicleDropdown"
         value={selectedVehicleId || ""}
         onChange={handleVehicleSelect}

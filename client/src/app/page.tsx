@@ -6,10 +6,10 @@ import { Github } from "lucide-react";
 const page = () => {
   return (
     <div>
-      <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
+      {/* <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
         <h1>Not Supported</h1>
-      </div>
-      <div className="hidden md:flex justify-center items-center flex-col h-screen">
+      </div> */}
+      <div className="flex justify-center items-center flex-col h-screen">
         <div className="space-y-5">
           <div className="space-y-1">
             <h4 className="text-2xl font-bold tracking-wide leading-none">

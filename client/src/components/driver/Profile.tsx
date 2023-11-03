@@ -40,15 +40,15 @@ export const SavedInfo: React.FC<SavedInfoProps> = ({ userName }) => {
   return (
     <div>
       {displayedInfo && (
-        <div className="flex items-center space-x-10 px-20">
-          <div className="w-1/2">
+        <div className="flex md:flex-row flex-col items-center md:space-x-10 md:px-20">
+          <div className="md:w-1/2 md:mb-0 mb-6">
             <img
               src={displayedInfo.imageUrl}
               className="rounded-full w-52"
               alt={displayedInfo.name}
             />
           </div>
-          <div className="w-1/2 flex-col flex space-y-2">
+          <div className="md:w-1/2 w-full flex-col flex space-y-2">
             <p>Name: {displayedInfo.name}</p>
             <p>Blood: {displayedInfo.blood}</p>
             <p>Phone: {displayedInfo.phone}</p>
