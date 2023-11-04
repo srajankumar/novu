@@ -96,6 +96,12 @@ const routeCoordinates: RouteCoordinates = {
     toLatitude: 12.9196543,
     toLongitude: 74.8900598,
   },
+  "10A": {
+    fromLatitude: 12.8630057,
+    fromLongitude: 74.8370807,
+    toLatitude: 12.8680635,
+    toLongitude: 74.9246103,
+  },
 };
 
 interface RouteMapProps {
