@@ -13,15 +13,9 @@ const AuthButton = () => {
 
   return (
     <div>
-      {!cookies.access_token ? (
-        <Link href="/admin/login">
-          <Button variant="outline">Login</Button>
-        </Link>
-      ) : (
-        <Button onClick={logout} variant="destructive">
-          Logout
-        </Button>
-      )}
+      <Button onClick={logout} variant="destructive">
+        Logout
+      </Button>
     </div>
   );
 };
