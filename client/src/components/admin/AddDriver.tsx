@@ -22,7 +22,7 @@ export default function AddDriver() {
     routeID: "",
     from: "",
     to: "",
-    experience: 0,
+    experience: "",
     bio: "",
     email: "",
     username: "",
@@ -43,7 +43,7 @@ export default function AddDriver() {
       routeID: "",
       from: "",
       to: "",
-      experience: 0,
+      experience: "",
       bio: "",
       email: "",
       username: "",
@@ -80,6 +80,7 @@ export default function AddDriver() {
           <div className="grid gap-2">
             <Label htmlFor="username">Full Name</Label>
             <Input
+              required
               value={information.name}
               id="username"
               type="text"
@@ -91,6 +92,7 @@ export default function AddDriver() {
           <div className="grid gap-2">
             <Label htmlFor="phone">Phone</Label>
             <Input
+              required
               value={information.phone}
               id="phone"
               type="number"
@@ -172,6 +174,7 @@ export default function AddDriver() {
           <div className="grid gap-2">
             <Label htmlFor="imageUrl">Image URL</Label>
             <Input
+              required
               value={information.imageUrl}
               id="imageUrl"
               type="text"
@@ -184,6 +187,7 @@ export default function AddDriver() {
           <div className="grid gap-2">
             <Label htmlFor="busID">Vehicle ID</Label>
             <Input
+              required
               value={information.busID}
               id="busID"
               type="text"
@@ -195,6 +199,7 @@ export default function AddDriver() {
           <div className="grid gap-2">
             <Label htmlFor="routeID">Route ID</Label>
             <Input
+              required
               value={information.routeID}
               id="routeID"
               type="text"
@@ -208,6 +213,7 @@ export default function AddDriver() {
             <Label htmlFor="latitude">Route</Label>
             <div className="flex gap-4">
               <Input
+                required
                 value={information.from}
                 id="from"
                 type="text"
@@ -216,6 +222,7 @@ export default function AddDriver() {
                 onChange={handleChange}
               />
               <Input
+                required
                 value={information.to}
                 id="to"
                 type="text"
@@ -229,6 +236,7 @@ export default function AddDriver() {
           <div className="grid gap-2">
             <Label htmlFor="time">Timings</Label>
             <Input
+              required
               value={information.time}
               id="time"
               type="text"

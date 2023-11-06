@@ -109,10 +109,11 @@ interface RouteMapProps {
 }
 
 export default function RouteMap({ userName }: RouteMapProps) {
-  const [routeID, setRouteID] = useState<string | null>(null);
+  const [routeIDs, setRouteIDs] = useState<string[]>([]);
+  const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRouteID = async () => {
+    const fetchDriverRoutes = async () => {
       try {
         const driverResponse = await axios.get(
           `${serverUrl}/driver/info?name=${userName}`
@@ -123,30 +124,53 @@ export default function RouteMap({ userName }: RouteMapProps) {
           return;
         }
 
-        const matchingDriver = driverResponse.data.find(
+        const matchingDrivers = driverResponse.data.filter(
           (driver: { name: string }) => driver.name === userName
         );
 
-        if (!matchingDriver) {
+        if (matchingDrivers.length === 0) {
           console.log("Driver not found");
           return;
         }
 
-        const driverRouteID = matchingDriver.routeID;
+        const driverRouteIDs = matchingDrivers.map(
+          (driver: { routeID: string }) => driver.routeID
+        );
 
-        setRouteID(driverRouteID);
+        setRouteIDs(driverRouteIDs);
+        setSelectedRoute(driverRouteIDs[0]); // Set the default selection to the first route ID
       } catch (err) {
         console.error(err);
       }
     };
 
-    fetchRouteID();
+    fetchDriverRoutes();
   }, [userName]);
 
-  const routeInformation = routeID ? routeCoordinates[routeID] : null;
+  const routeInformation = selectedRoute
+    ? routeCoordinates[selectedRoute]
+    : null;
+
+  const handleRouteSelect = (selectedRoute: string) => {
+    setSelectedRoute(selectedRoute);
+  };
 
   return (
     <div>
+      <div>
+        <select
+          className="border border-input text-xs md:text-base bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 mb-5 mt-2"
+          onChange={(e) => handleRouteSelect(e.target.value)}
+          value={selectedRoute || ""}
+        >
+          {routeIDs.map((routeID) => (
+            <option key={routeID} value={routeID}>
+              {routeID}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {routeInformation && (
         <GoogleMap
           fromLatitude={routeInformation.fromLatitude}
