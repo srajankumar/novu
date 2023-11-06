@@ -25,17 +25,17 @@ Novu is a comprehensive fleet management application designed to help fleet mana
 
 ### Data
 
-| Bus Route No | Source     | Destination          | Frequency     | Route           |
-| ------------ | ---------- | -------------------- | ------------- | --------------- |
-| 1            | State Bank | Kunjathbail          | Every hour    | Carstreet, Urwa |
-| 7            | State Bank | Urwa Store           | Every 15 mins |                 |
-| 13           | State Bank | Kottara              | Every hour    |                 |
-| 1B           | State Bank | Kodical              | Every 15 mins |                 |
-| 31           | State Bank | Mannagudda Shediguri | Every 20 mins |                 |
-| 31A          | State Bank | Lalbag Shediguri     | Every 20 mins |                 |
-| 31B          | State Bank | Dambel               | Every hour    |                 |
-| 16           | State Bank | Sulthan Bathery      | Every 30 mins |                 |
-| 16A          | State Bank | Sulthan Bathery      | Every 30 mins |                 |
+| Route ID | Source     | Destination          | Frequency     | Route           |
+| -------- | ---------- | -------------------- | ------------- | --------------- |
+| 1        | State Bank | Kunjathbail          | Every hour    | Carstreet, Urwa |
+| 7        | State Bank | Urwa Store           | Every 15 mins |                 |
+| 13       | State Bank | Kottara              | Every hour    |                 |
+| 1B       | State Bank | Kodical              | Every 15 mins |                 |
+| 31       | State Bank | Mannagudda Shediguri | Every 20 mins |                 |
+| 31A      | State Bank | Lalbag Shediguri     | Every 20 mins |                 |
+| 31B      | State Bank | Dambel               | Every hour    |                 |
+| 16       | State Bank | Sulthan Bathery      | Every 30 mins |                 |
+| 16A      | State Bank | Sulthan Bathery      | Every 30 mins |                 |
 
 Data Source [Wikipedia](https://en.wikipedia.org/wiki/Mangalore_City_Bus_routes)
 
