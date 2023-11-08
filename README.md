@@ -14,7 +14,6 @@ Novu is a comprehensive fleet management application designed to help fleet mana
 - Add, edit, and delete driver details.
 - Add, edit, and delete vehicle details.
 - Assign drivers to vehicles.
-- View real-time vehicle location on a map.
 
 ### Driver Features
 
