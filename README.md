@@ -14,7 +14,6 @@ Novu is a comprehensive fleet management application designed to help fleet mana
 - Add, edit, and delete driver details.
 - Add, edit, and delete vehicle details.
 - Assign drivers to vehicles.
-- View real-time vehicle location on a map.
 
 ### Driver Features
 
@@ -22,6 +21,22 @@ Novu is a comprehensive fleet management application designed to help fleet mana
 - Access route information for their assigned trips.
 - Receive parking location details for each trip.
 - View a summary of their assigned trips.
+
+### Data
+
+| Route ID | Source     | Destination          | Frequency     | Route           |
+| -------- | ---------- | -------------------- | ------------- | --------------- |
+| 1        | State Bank | Kunjathbail          | Every hour    | Carstreet, Urwa |
+| 7        | State Bank | Urwa Store           | Every 15 mins |                 |
+| 13       | State Bank | Kottara              | Every hour    |                 |
+| 1B       | State Bank | Kodical              | Every 15 mins |                 |
+| 31       | State Bank | Mannagudda Shediguri | Every 20 mins |                 |
+| 31A      | State Bank | Lalbag Shediguri     | Every 20 mins |                 |
+| 31B      | State Bank | Dambel               | Every hour    |                 |
+| 16       | State Bank | Sulthan Bathery      | Every 30 mins |                 |
+| 16A      | State Bank | Sulthan Bathery      | Every 30 mins |                 |
+
+Data Source [Wikipedia](https://en.wikipedia.org/wiki/Mangalore_City_Bus_routes)
 
 ## Tech Stacks
 

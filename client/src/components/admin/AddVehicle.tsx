@@ -57,6 +57,7 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="vehicleID">Vehicle ID</Label>
             <Input
+              required
               value={vehicleInfo.vehicleID}
               id="vehicleID"
               type="text"
@@ -68,6 +69,7 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="model">Model</Label>
             <Input
+              required
               value={vehicleInfo.model}
               id="model"
               type="text"
@@ -79,6 +81,7 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="year">Year</Label>
             <Input
+              required
               value={vehicleInfo.year}
               id="year"
               type="number"
@@ -90,6 +93,7 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="plateNumber">Plate Number</Label>
             <Input
+              required
               value={vehicleInfo.plateNumber}
               id="plateNumber"
               type="text"
@@ -101,6 +105,7 @@ export default function AddVehicle() {
           <div className="grid gap-2">
             <Label htmlFor="color">Color</Label>
             <Input
+              required
               value={vehicleInfo.color}
               id="color"
               type="text"
@@ -114,6 +119,7 @@ export default function AddVehicle() {
             <Label htmlFor="latitude">Parking Location</Label>
             <div className="flex gap-4">
               <Input
+                required
                 value={vehicleInfo.latitude}
                 id="latitude"
                 type="text"
@@ -122,6 +128,7 @@ export default function AddVehicle() {
                 onChange={handleChange}
               />
               <Input
+                required
                 value={vehicleInfo.longitude}
                 id="longitude"
                 type="text"

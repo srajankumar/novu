@@ -19,88 +19,66 @@ type RouteCoordinates = {
 
 const routeCoordinates: RouteCoordinates = {
   "1": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.9417468,
-    toLongitude: 74.8514039,
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.9415206,
+    toLongitude: 74.854157,
   },
-  "1A": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.8893897,
-    toLongitude: 74.783423,
+
+  "7": {
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.8994669,
+    toLongitude: 74.8361301,
   },
+
+  "13": {
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.9029797,
+    toLongitude: 74.8357253,
+  },
+
   "1B": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.9075785,
-    toLongitude: 74.8249948,
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.9053247,
+    toLongitude: 74.8298392,
   },
-  "2": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 13.0217652,
-    toLongitude: 74.7903818,
+
+  "31": {
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.9001671,
+    toLongitude: 74.8258711,
   },
-  "2A": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 13.0649255,
-    toLongitude: 74.7758675,
+
+  "31A": {
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.9016396,
+    toLongitude: 74.8249463,
   },
-  "2C": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.9605753,
-    toLongitude: 74.839527,
+
+  "31B": {
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.9025985,
+    toLongitude: 74.8233775,
   },
-  "2D": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.9679362,
-    toLongitude: 74.7142011,
+
+  "16": {
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.8893086,
+    toLongitude: 74.8216279,
   },
-  "2E": {
-    fromLatitude: 12.8688458,
-    fromLongitude: 74.8556288,
-    toLatitude: 12.9810199,
-    toLongitude: 74.8797253,
-  },
-  "2F": {
-    fromLatitude: 12.8688458,
-    fromLongitude: 74.8556288,
-    toLatitude: 12.9810199,
-    toLongitude: 74.8797253,
-  },
-  "3": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.9285486,
-    toLongitude: 74.8786093,
-  },
-  "3A": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.9285486,
-    toLongitude: 74.8786093,
-  },
-  "3B": {
-    fromLatitude: 12.8494195,
-    fromLongitude: 74.7701654,
-    toLatitude: 12.9285486,
-    toLongitude: 74.8786093,
-  },
-  "3D": {
-    fromLatitude: 12.8630128,
-    fromLongitude: 74.8346099,
-    toLatitude: 12.9196543,
-    toLongitude: 74.8900598,
-  },
-  "10A": {
-    fromLatitude: 12.8630057,
-    fromLongitude: 74.8370807,
-    toLatitude: 12.8680635,
-    toLongitude: 74.9246103,
+
+  "16A": {
+    fromLatitude: 12.8625882,
+    fromLongitude: 74.8366402,
+    toLatitude: 12.8893086,
+    toLongitude: 74.8216279,
   },
 };
 
@@ -109,10 +87,11 @@ interface RouteMapProps {
 }
 
 export default function RouteMap({ userName }: RouteMapProps) {
-  const [routeID, setRouteID] = useState<string | null>(null);
+  const [routeIDs, setRouteIDs] = useState<string[]>([]);
+  const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRouteID = async () => {
+    const fetchDriverRoutes = async () => {
       try {
         const driverResponse = await axios.get(
           `${serverUrl}/driver/info?name=${userName}`
@@ -123,30 +102,53 @@ export default function RouteMap({ userName }: RouteMapProps) {
           return;
         }
 
-        const matchingDriver = driverResponse.data.find(
+        const matchingDrivers = driverResponse.data.filter(
           (driver: { name: string }) => driver.name === userName
         );
 
-        if (!matchingDriver) {
+        if (matchingDrivers.length === 0) {
           console.log("Driver not found");
           return;
         }
 
-        const driverRouteID = matchingDriver.routeID;
+        const driverRouteIDs = matchingDrivers.map(
+          (driver: { routeID: string }) => driver.routeID
+        );
 
-        setRouteID(driverRouteID);
+        setRouteIDs(driverRouteIDs);
+        setSelectedRoute(driverRouteIDs[0]); // Set the default selection to the first route ID
       } catch (err) {
         console.error(err);
       }
     };
 
-    fetchRouteID();
+    fetchDriverRoutes();
   }, [userName]);
 
-  const routeInformation = routeID ? routeCoordinates[routeID] : null;
+  const routeInformation = selectedRoute
+    ? routeCoordinates[selectedRoute]
+    : null;
+
+  const handleRouteSelect = (selectedRoute: string) => {
+    setSelectedRoute(selectedRoute);
+  };
 
   return (
     <div>
+      <div>
+        <select
+          className="border border-input text-xs md:text-base bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 mb-5 mt-2"
+          onChange={(e) => handleRouteSelect(e.target.value)}
+          value={selectedRoute || ""}
+        >
+          {routeIDs.map((routeID) => (
+            <option key={routeID} value={routeID}>
+              {routeID}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {routeInformation && (
         <GoogleMap
           fromLatitude={routeInformation.fromLatitude}
@@ -158,3 +160,163 @@ export default function RouteMap({ userName }: RouteMapProps) {
     </div>
   );
 }
+
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import dynamic from "next/dynamic";
+
+// const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
+// const GoogleMap = dynamic(() => import("@/components/driver/MapRoute"), {
+//   ssr: false,
+// });
+
+// type RouteCoordinates = {
+//   [key: string]: {
+//     fromLatitude: number;
+//     fromLongitude: number;
+//     toLatitude: number;
+//     toLongitude: number;
+//   };
+// };
+
+// const routeCoordinates: RouteCoordinates = {
+//   "1": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.9415206,
+//     toLongitude: 74.854157,
+//   },
+
+//   "7": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.8994669,
+//     toLongitude: 74.8361301,
+//   },
+
+//   "13": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.9029797,
+//     toLongitude: 74.8357253,
+//   },
+
+//   "1B": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.9053247,
+//     toLongitude: 74.8298392,
+//   },
+
+//   "31": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.9001671,
+//     toLongitude: 74.8258711,
+//   },
+
+//   "31A": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.9016396,
+//     toLongitude: 74.8249463,
+//   },
+
+//   "31B": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.9025985,
+//     toLongitude: 74.8233775,
+//   },
+
+//   "16": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.8893086,
+//     toLongitude: 74.8216279,
+//   },
+
+//   "16A": {
+//     fromLatitude: 12.8625882,
+//     fromLongitude: 74.8366402,
+//     toLatitude: 12.8893086,
+//     toLongitude: 74.8216279,
+//   },
+// };
+
+// interface RouteMapProps {
+//   userName: string;
+// }
+
+// export default function RouteMap({ userName }: RouteMapProps) {
+//   const [routeID, setRouteID] = useState<string | null>(null);
+//   const [selectedRoute, setSelectedRoute] = useState<string | null>(null);
+
+//   useEffect(() => {
+//     const fetchRouteID = async () => {
+//       try {
+//         const driverResponse = await axios.get(
+//           `${serverUrl}/driver/info?name=${userName}`
+//         );
+
+//         if (driverResponse.data.length === 0) {
+//           console.log("Driver not found");
+//           return;
+//         }
+
+//         const matchingDriver = driverResponse.data.find(
+//           (driver: { name: string }) => driver.name === userName
+//         );
+
+//         if (!matchingDriver) {
+//           console.log("Driver not found");
+//           return;
+//         }
+
+//         const driverRouteID = matchingDriver.routeID;
+
+//         setRouteID(driverRouteID);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+
+//     fetchRouteID();
+//   }, [userName]);
+
+//   const routeInformation = routeID ? routeCoordinates[routeID] : null;
+
+//   const handleRouteSelect = (selectedRoute: string) => {
+//     setSelectedRoute(selectedRoute);
+//     setRouteID(selectedRoute);
+//   };
+
+//   return (
+//     <div>
+//       <div>
+//         <label>Select Route ID: </label>
+//         <select
+//           onChange={(e) => handleRouteSelect(e.target.value)}
+//           value={selectedRoute || ""}
+//         >
+//           <option value="">Select a route</option>
+//           {Object.keys(routeCoordinates).map((routeID) => (
+//             <option key={routeID} value={routeID}>
+//               {routeID}
+//             </option>
+//           ))}
+//         </select>
+//       </div>
+
+//       {routeInformation && (
+//         <GoogleMap
+//           fromLatitude={routeInformation.fromLatitude}
+//           fromLongitude={routeInformation.fromLongitude}
+//           toLatitude={routeInformation.toLatitude}
+//           toLongitude={routeInformation.toLongitude}
+//         />
+//       )}
+//     </div>
+//   );
+// }
