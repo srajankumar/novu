@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -25,20 +24,37 @@ export default function DriverLogin() {
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+
+    // Check if both username and password are filled
+    if (!username.trim() || !password.trim()) {
+      alert("Please fill in both username and password fields.");
+      return;
+    }
+
     setCookies("username", username);
-    console.log("API request sent!");
+
     try {
       const response = await axios.post(`${serverUrl}/Driver/login`, {
         username,
         password,
       });
 
-      setCookies("access_token", response.data.token);
-      window.localStorage.setItem("userID", response.data.userID);
+      if (response.data.message === "Driver doesn't exist") {
+        alert("Driver not found. Please check your credentials.");
+        return;
+      }
 
-      window.location.href = "/driver/dashboard";
+      // Check if the response contains a token
+      if (response.data.token) {
+        setCookies("access_token", response.data.token);
+        window.localStorage.setItem("userID", response.data.userID);
+        window.location.href = "/driver/dashboard";
+      } else {
+        console.log("Unexpected response:", response);
+      }
     } catch (err) {
       console.error(err);
+      alert("An error occurred. Please try again later.");
     }
   };
 

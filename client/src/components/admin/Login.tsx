@@ -23,21 +23,38 @@ export default function Login() {
   const [, setCookies] = useCookies(["access_token", "username"]);
 
   const onSubmit = async (event: SyntheticEvent) => {
-    event.preventDefault();
-    setCookies("username", username);
-    console.log("API request sent!");
     try {
+      event.preventDefault();
+
+      // Check if both username and password are filled
+      if (!username.trim() || !password.trim()) {
+        alert("Please fill in both username and password fields.");
+        return;
+      }
+
+      setCookies("username", username);
+
       const response = await axios.post(`${serverUrl}/auth/login`, {
         username,
         password,
       });
 
-      setCookies("access_token", response.data.token);
-      window.localStorage.setItem("userID", response.data.userID);
-
-      window.location.href = "/admin/dashboard";
+      // Check if the response contains a token
+      if (response.data.token) {
+        setCookies("access_token", response.data.token);
+        window.localStorage.setItem("userID", response.data.userID);
+        window.location.href = "/admin/dashboard";
+      } else if (response.data.message === "User not found") {
+        alert("User not found. Please check your credentials.");
+      } else if (response.data.message === "Incorrect password") {
+        alert("Incorrect password. Please check your credentials.");
+      } else {
+        // Handle other cases, if needed
+        console.log("Unexpected response:", response);
+      }
     } catch (err) {
       console.error(err);
+      alert("An error occurred. Please try again later.");
     }
   };
 

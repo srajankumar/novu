@@ -65,16 +65,29 @@ router.post("/login", async (req, res) => {
   // Extract username and password from the request body
   const { username, password } = req.body;
 
+  // Check if both username and password are provided
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ message: "Please provide both username and password!" });
+  }
+
   // Find the user with the provided username
   const user = await UserModel.findOne({ username });
+
   if (!user) {
-    return res.json({ message: "User doesn't exist" });
+    // If the user doesn't exist, send an alert
+    return res.status(400).json({ message: "User doesn't exist" });
   }
 
   // Compare the provided password with the stored hashed password using bcrypt
   const isPasswordValid = await bcrypt.compare(password, user.password);
+
   if (!isPasswordValid) {
-    return res.json({ message: "Username or password is incorrect!" });
+    // If the password is invalid, send an alert
+    return res
+      .status(400)
+      .json({ message: "Username or password is incorrect!" });
   }
 
   // If the password is valid, create a JWT token and send it as a response

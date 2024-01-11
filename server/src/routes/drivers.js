@@ -64,16 +64,29 @@ router.post("/login", async (req, res) => {
   // Extract username and password from the request body
   const { username, password } = req.body;
 
+  // Check if both username and password are provided
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ message: "Please provide both username and password!" });
+  }
+
   // Find the driver with the provided username
   const driver = await DriverModel.findOne({ username });
+
   if (!driver) {
-    return res.json({ message: "Driver doesn't exist" });
+    // If the driver doesn't exist, send an alert
+    return res.status(400).json({ message: "Driver doesn't exist" });
   }
 
   // Compare the provided password with the stored hashed password using bcrypt
   const isPasswordValid = await bcrypt.compare(password, driver.password);
+
   if (!isPasswordValid) {
-    return res.json({ message: "Username or password is incorrect!" });
+    // If the password is invalid, send an alert
+    return res
+      .status(400)
+      .json({ message: "Username or password is incorrect!" });
   }
 
   // If the password is valid, create a JWT token and send it as a response
