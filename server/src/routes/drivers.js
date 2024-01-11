@@ -6,34 +6,60 @@ import { DriverModel } from "../models/Drivers.js";
 const router = express.Router();
 export { router as driverRouter };
 
-// User Registration Route
+// Driver Registration Route
 router.post("/register", async (req, res) => {
-  // Extract email, username, password, and additional fields from the request body
+  // Extract email, username, and password from the request body
   const { email, username, password, phone } = req.body;
 
-  // Check if a driver with the same username already exists
-  const driver = await DriverModel.findOne({ username });
+  // Check if any of the required credentials are missing
+  if (!email || !username || !password || !phone) {
+    return res
+      .status(400)
+      .json({ message: "Please provide all required credentials!" });
+  }
 
-  if (driver) {
-    return res.json({ message: "Driver already exists!" });
+  // Check if a driver with the same phone number already exists
+  const driverWithPhone = await DriverModel.findOne({ phone });
+
+  if (driverWithPhone) {
+    return res
+      .status(400)
+      .json({ message: "Driver with this phone number already exists!" });
+  }
+
+  // Check if a driver with the same username already exists
+  const driverWithUsername = await DriverModel.findOne({ username });
+
+  if (driverWithUsername) {
+    return res
+      .status(400)
+      .json({ message: "Driver with this username already exists!" });
+  }
+
+  // Check if the password meets the minimum length requirement
+  if (password.length < 6) {
+    return res.json({
+      message: "Password must be at least 6 characters long!",
+    });
   }
 
   // Hash the password using bcrypt
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  // Create a new driver with the hashed password and additional fields, and save it to the database
+  // Create a new driver with the hashed password and save it to the database
   const newDriver = new DriverModel({
     email,
     username,
     phone,
     password: hashedPassword,
   });
+
   await newDriver.save();
 
   res.json({ message: "Driver registered successfully!" });
 });
 
-// User Login Route
+// Driver Login Route
 router.post("/login", async (req, res) => {
   // Extract username and password from the request body
   const { username, password } = req.body;
@@ -41,7 +67,7 @@ router.post("/login", async (req, res) => {
   // Find the driver with the provided username
   const driver = await DriverModel.findOne({ username });
   if (!driver) {
-    return res.json({ message: "Driver Doesn't exist" });
+    return res.json({ message: "Driver doesn't exist" });
   }
 
   // Compare the provided password with the stored hashed password using bcrypt

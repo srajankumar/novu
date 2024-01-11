@@ -52,6 +52,7 @@ export default function Register() {
         }
       } catch (error) {
         console.error("Error checking user existence:", error);
+        alert("Error checking driver existence:");
       }
     }
 
