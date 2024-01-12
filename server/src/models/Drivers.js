@@ -30,7 +30,15 @@ const DriverSchema = new mongoose.Schema(
     // Phone of the driver
     phone: {
       type: String,
-      required: [true, "Please add a phone number"],
+      required: [true, "Please add a 10-digit phone number"],
+      validate: {
+        validator: function (v) {
+          // Check if the phone number has 10 digits
+          return /^[0-9]{10}$/.test(v);
+        },
+        message: (props) =>
+          `${props.value} is not a valid 10-digit phone number!`,
+      },
       default: "+91",
     },
     savedInfo: [{ type: mongoose.Schema.Types.ObjectId, ref: "drivers" }],
