@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,6 +31,22 @@ export default function AddDriver() {
     userOwner: driverID,
   });
 
+  const [validationErrors, setValidationErrors] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    birthdate: "",
+    blood: "",
+    license: "",
+    experience: "",
+    imageUrl: "",
+    busID: "",
+    routeID: "",
+    from: "",
+    to: "",
+    time: "",
+  });
+
   const clearForm = () => {
     setInformation({
       name: "",
@@ -51,6 +67,21 @@ export default function AddDriver() {
       time: "",
       userOwner: driverID,
     });
+    setValidationErrors({
+      name: "",
+      phone: "",
+      email: "",
+      birthdate: "",
+      blood: "",
+      license: "",
+      experience: "",
+      imageUrl: "",
+      busID: "",
+      routeID: "",
+      from: "",
+      to: "",
+      time: "",
+    });
   };
 
   const handleChange = (
@@ -58,17 +89,91 @@ export default function AddDriver() {
   ) => {
     const { name, value } = event.target;
     setInformation({ ...information, [name]: value });
+    setValidationErrors({ ...validationErrors, [name]: "" });
+  };
+  const validateForm = () => {
+    let isValid = true;
+
+    if (information.name.length < 2) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        name: "Name must be at least 2 characters long.",
+      }));
+      isValid = false;
+      alert("Name must be at least 2 characters long.");
+    }
+
+    if (!/^\d{10}$/.test(information.phone)) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        phone: "Please enter a valid 10-digit phone number.",
+      }));
+      isValid = false;
+      alert("Please enter a valid 10-digit phone number.");
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(information.email)) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Please enter a valid email address.",
+      }));
+      isValid = false;
+      alert("Please enter a valid email address.");
+    }
+
+    if (!/^\d{2}-\d{2}-\d{4}$/.test(information.birthdate)) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        birthdate: "Please enter a valid date in DD-MM-YYYY format.",
+      }));
+      isValid = false;
+      alert("Please enter a valid date in DD-MM-YYYY format.");
+    }
+
+    if (!/^https?:\/\//.test(information.imageUrl)) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        imageUrl: "Please enter a valid URL for the image.",
+      }));
+      isValid = false;
+      alert("Please enter a valid URL for the image.");
+    }
+
+    if (!information.blood) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        blood: "Blood Group must be filled.",
+      }));
+      isValid = false;
+      alert("Blood Group must be filled.");
+    }
+
+    if (!information.license) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        license: "License Number must be filled.",
+      }));
+      isValid = false;
+      alert("License Number must be filled.");
+    }
+
+    // Add more validations for other fields...
+
+    return isValid;
   };
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    try {
-      await axios.post(`${serverUrl}/driver/info`, information);
-      alert("Driver Information Added");
-      clearForm();
-      // console.log(information);
-    } catch (err) {
-      console.error(err);
+
+    if (validateForm()) {
+      try {
+        await axios.post(`${serverUrl}/driver/info`, information);
+        alert("Driver Information Added");
+        clearForm();
+        console.log(information);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
@@ -78,16 +183,19 @@ export default function AddDriver() {
         <div className="text-2xl font-bold py-10">Add Driver</div>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="username">Full Name</Label>
+            <Label htmlFor="name">Full Name</Label>
             <Input
               required
               value={information.name}
-              id="username"
+              id="name"
               type="text"
               placeholder="Chiara Rossi"
               name="name"
               onChange={handleChange}
             />
+            {validationErrors.name && (
+              <div className="text-red-500">{validationErrors.name}</div>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="phone">Phone</Label>
@@ -100,6 +208,9 @@ export default function AddDriver() {
               name="phone"
               onChange={handleChange}
             />
+            {validationErrors.phone && (
+              <div className="text-red-500">{validationErrors.phone}</div>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
@@ -111,6 +222,9 @@ export default function AddDriver() {
               name="email"
               onChange={handleChange}
             />
+            {validationErrors.email && (
+              <div className="text-red-500">{validationErrors.email}</div>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -119,10 +233,13 @@ export default function AddDriver() {
               value={information.birthdate}
               id="birthdate"
               type="text"
-              placeholder="1985-08-27"
+              placeholder="DD-MM-YYYY"
               name="birthdate"
               onChange={handleChange}
             />
+            {validationErrors.birthdate && (
+              <div className="text-red-500">{validationErrors.birthdate}</div>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -135,6 +252,9 @@ export default function AddDriver() {
               name="blood"
               onChange={handleChange}
             />
+            {validationErrors.blood && (
+              <div className="text-red-500">{validationErrors.blood}</div>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -147,10 +267,13 @@ export default function AddDriver() {
               name="license"
               onChange={handleChange}
             />
+            {validationErrors.license && (
+              <div className="text-red-500">{validationErrors.license}</div>
+            )}
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="experience">Experience ( in years )</Label>
+            <Label htmlFor="experience">Experience (in years)</Label>
             <Input
               value={information.experience}
               id="experience"
@@ -159,6 +282,9 @@ export default function AddDriver() {
               name="experience"
               onChange={handleChange}
             />
+            {validationErrors.experience && (
+              <div className="text-red-500">{validationErrors.experience}</div>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="bio">Bio</Label>
@@ -182,6 +308,9 @@ export default function AddDriver() {
               name="imageUrl"
               onChange={handleChange}
             />
+            {validationErrors.imageUrl && (
+              <div className="text-red-500">{validationErrors.imageUrl}</div>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -195,6 +324,9 @@ export default function AddDriver() {
               name="busID"
               onChange={handleChange}
             />
+            {validationErrors.busID && (
+              <div className="text-red-500">{validationErrors.busID}</div>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="routeID">Route ID</Label>
@@ -207,6 +339,9 @@ export default function AddDriver() {
               name="routeID"
               onChange={handleChange}
             />
+            {validationErrors.routeID && (
+              <div className="text-red-500">{validationErrors.routeID}</div>
+            )}
           </div>
 
           <div className="gap-2 grid">
@@ -244,6 +379,9 @@ export default function AddDriver() {
               name="time"
               onChange={handleChange}
             />
+            {validationErrors.time && (
+              <div className="text-red-500">{validationErrors.time}</div>
+            )}
           </div>
 
           <div className="grid gap-2">
