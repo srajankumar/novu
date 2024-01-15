@@ -20,6 +20,16 @@ export default function AddVehicle() {
     owner: driverID,
   });
 
+  const [validationErrors, setValidationErrors] = useState({
+    vehicleID: "",
+    model: "",
+    year: "",
+    plateNumber: "",
+    color: "",
+    latitude: "",
+    longitude: "",
+  });
+
   const clearForm = () => {
     setVehicleInfo({
       vehicleID: "",
@@ -31,15 +41,49 @@ export default function AddVehicle() {
       latitude: "",
       owner: driverID,
     });
+
+    setValidationErrors({
+      vehicleID: "",
+      model: "",
+      year: "",
+      plateNumber: "",
+      color: "",
+      latitude: "",
+      longitude: "",
+    });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setVehicleInfo({ ...vehicleInfo, [name]: value });
+    setValidationErrors({ ...validationErrors, [name]: "" });
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    const errors: any = {};
+
+    Object.entries(vehicleInfo).forEach(([key, value]) => {
+      if (!value) {
+        errors[key] = `Please enter a valid ${
+          key === "plateNumber" ? "Plate Number" : key
+        }.`;
+        isValid = false;
+      }
+    });
+
+    setValidationErrors(errors);
+    return isValid;
   };
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+
+    if (!validateForm()) {
+      alert("Please fill in all the required fields correctly.");
+      return;
+    }
+
     try {
       await axios.post(`${serverUrl}/vehicle/info`, vehicleInfo);
       alert("Vehicle Information Added");
@@ -65,6 +109,7 @@ export default function AddVehicle() {
               name="vehicleID"
               onChange={handleChange}
             />
+            <span className="text-red-500">{validationErrors.vehicleID}</span>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="model">Model</Label>
@@ -77,6 +122,7 @@ export default function AddVehicle() {
               name="model"
               onChange={handleChange}
             />
+            <span className="text-red-500">{validationErrors.model}</span>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="year">Year</Label>
@@ -89,6 +135,7 @@ export default function AddVehicle() {
               name="year"
               onChange={handleChange}
             />
+            <span className="text-red-500">{validationErrors.year}</span>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="plateNumber">Plate Number</Label>
@@ -101,6 +148,7 @@ export default function AddVehicle() {
               name="plateNumber"
               onChange={handleChange}
             />
+            <span className="text-red-500">{validationErrors.plateNumber}</span>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="color">Color</Label>
@@ -113,6 +161,7 @@ export default function AddVehicle() {
               name="color"
               onChange={handleChange}
             />
+            <span className="text-red-500">{validationErrors.color}</span>
           </div>
 
           <div className="gap-2 grid">
@@ -137,6 +186,8 @@ export default function AddVehicle() {
                 onChange={handleChange}
               />
             </div>
+            <span className="text-red-500">{validationErrors.latitude}</span>
+            <span className="text-red-500">{validationErrors.longitude}</span>
           </div>
 
           <div className="grid gap-2">
