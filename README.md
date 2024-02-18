@@ -91,6 +91,6 @@ Data Source [Wikipedia](https://en.wikipedia.org/wiki/Mangalore_City_Bus_routes)
 
 ## Contributors
 
-<a href="https://github.com/srajankumar/novu/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=srajankumar/novu" />
+<a href="https://github.com/TejasNayak42/novu/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=TejasNayak42/novu" />
 </a>
