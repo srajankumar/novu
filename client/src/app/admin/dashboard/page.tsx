@@ -52,13 +52,21 @@ export default function DashboardPage() {
   );
   const [cookies] = useCookies(["username"]);
   const userName = cookies.username;
+  // const [cookiesJar] = useCookies(["access_token"]);
 
   useEffect(() => {
     const fetchDriverInfo = async () => {
       try {
-        const response = await axios.get(`${serverUrl}/driver/info`);
+        const response = await axios.get(
+          `${serverUrl}/driver/info`
+          //  {
+          //   headers: {
+          //     authorization: cookiesJar.access_token,
+          //   },
+          // }
+        );
         setDriverInformation(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       } catch (err) {
         console.error(err);
       }
@@ -66,7 +74,14 @@ export default function DashboardPage() {
 
     const fetchVehicleInfo = async () => {
       try {
-        const response = await axios.get(`${serverUrl}/vehicle/info`);
+        const response = await axios.get(
+          `${serverUrl}/vehicle/info`
+          //  {
+          //   headers: {
+          //     authorization: cookiesJar.access_token,
+          //   },
+          // }
+        );
         setVehicleInformation(response.data);
         // console.log(response.data);
       } catch (err) {

@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "type": "module",
+  "author": "TejasNayak42",
   "scripts": {
     "start": "nodemon src/index.js"
   },

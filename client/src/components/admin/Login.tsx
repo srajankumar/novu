@@ -32,7 +32,7 @@ export default function Login() {
         return;
       }
 
-      setCookies("username", username);
+      // setCookies("username", username);
 
       const response = await axios.post(`${serverUrl}/auth/login`, {
         username,
@@ -42,8 +42,10 @@ export default function Login() {
       // Check if the response contains a token
       if (response.data.token) {
         setCookies("access_token", response.data.token);
-        window.localStorage.setItem("userID", response.data.userID);
+        setCookies("username", username);
         window.location.href = "/admin/dashboard";
+
+        window.localStorage.setItem("userID", response.data.userID);
       } else if (response.data.message === "User not found") {
         alert("User not found. Please check your credentials.");
       } else if (response.data.message === "Incorrect password") {

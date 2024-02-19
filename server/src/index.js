@@ -39,7 +39,7 @@ db.once("open", () => {
 });
 
 // Define the port for the server, using the provided port or defaulting to 3001
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3003;
 
 // Start the server and listen on the specified port
 app.listen(port, () =>

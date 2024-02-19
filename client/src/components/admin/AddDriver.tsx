@@ -6,11 +6,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import { useGetDriverID } from "@/hooks/useGetDriverID";
+import { useCookies } from "react-cookie";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export default function AddDriver() {
   const driverID = useGetDriverID();
+  const [cookies] = useCookies(["access_token"]);
+
   const [information, setInformation] = useState({
     name: "",
     birthdate: "",
@@ -167,7 +170,15 @@ export default function AddDriver() {
 
     if (validateForm()) {
       try {
-        await axios.post(`${serverUrl}/driver/info`, information);
+        await axios.post(
+          `${serverUrl}/driver/info`,
+          information
+          // {
+          //   headers: {
+          //     authorization: cookies.access_token,
+          //   },
+          // }
+        );
         alert("Driver Information Added");
         clearForm();
         console.log(information);

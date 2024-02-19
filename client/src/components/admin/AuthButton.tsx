@@ -4,10 +4,18 @@ import Link from "next/link";
 import React from "react";
 import { useCookies } from "react-cookie";
 const AuthButton = () => {
-  const [cookies, setCookies] = useCookies(["access_token"]);
+  const [cookies, setCookies, removeCookies] = useCookies([
+    "access_token",
+    "username",
+  ]);
+
   const logout = () => {
-    setCookies("access_token", "");
+    // Remove userID from local storage
     window.localStorage.removeItem("userID");
+
+    // Remove cookies
+    removeCookies("access_token");
+    removeCookies("username");
     window.location.href = "/";
   };
 

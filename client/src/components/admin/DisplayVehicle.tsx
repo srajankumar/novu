@@ -12,6 +12,7 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
+import { useCookies } from "react-cookie";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -29,11 +30,19 @@ interface VehicleInfo {
 export default function VehicleTable() {
   const [information, setInformation] = useState<VehicleInfo[]>([]);
   const [editedData, setEditedData] = useState<Partial<VehicleInfo>>({});
+  // const [cookies] = useCookies(["access_token"]);
 
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(`${serverUrl}/vehicle/info`);
+        const response = await axios.get(
+          `${serverUrl}/vehicle/info`
+          // {
+          //   headers: {
+          //     authorization: cookies.access_token,
+          //   },
+          // }
+        );
         setInformation(response.data);
       } catch (err) {
         console.error(err);
@@ -55,6 +64,11 @@ export default function VehicleTable() {
       const response = await axios.put(
         `${serverUrl}/vehicle/info/${vehicleId}`,
         editedData
+        // {
+        //   headers: {
+        //     authorization: cookies.access_token,
+        //   },
+        // }
       );
 
       const updatedInformation = information.map((info) => {
@@ -74,7 +88,14 @@ export default function VehicleTable() {
   const handleDelete = async (vehicleId: string) => {
     try {
       // Send a DELETE request to the server to delete the driver info
-      await axios.delete(`${serverUrl}/vehicle/info/${vehicleId}`);
+      await axios.delete(
+        `${serverUrl}/vehicle/info/${vehicleId}`
+        // {
+        //   headers: {
+        //     authorization: cookies.access_token,
+        //   },
+        // }
+      );
 
       // Update the data by removing the deleted driver
       setInformation((prevData) =>
