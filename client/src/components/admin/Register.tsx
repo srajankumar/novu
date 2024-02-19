@@ -44,15 +44,14 @@ export default function Register() {
     } else {
       // Check if a user with the provided phone number already exists
       try {
-        const response = await axios.get(
-          `${serverUrl}/auth/checkUser/${phone}`
-        );
+        const response = await axios.get(`${serverUrl}/auth/register/${phone}`);
         if (response.data.exists) {
           errors.phone = "User with this phone number already exists.";
         }
+        // If the phone number doesn't exist, you can simply proceed without setting any error.
       } catch (error) {
         console.error("Error checking user existence:", error);
-        alert("Error checking driver existence:");
+        // Handle other errors if needed, or simply proceed without setting an error.
       }
     }
 

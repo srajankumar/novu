@@ -91,6 +91,6 @@ router.post("/login", async (req, res) => {
   }
 
   // If the password is valid, create a JWT token and send it as a response
-  const token = jwt.sign({ id: user._id }, "secret");
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   res.json({ token, userID: user._id });
 });

@@ -14,6 +14,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Input } from "@/components/ui/input";
+import { useCookies } from "react-cookie";
+import { useGetDriverID } from "@/hooks/useGetDriverID";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -32,11 +34,21 @@ interface DriverInfo {
 export default function TableDemo() {
   const [information, setInformation] = useState<DriverInfo[]>([]);
   const [editedData, setEditedData] = useState<Partial<DriverInfo>>({});
+  // const [cookies] = useCookies(["access_token"]);
+  const driverID = useGetDriverID();
 
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(`${serverUrl}/driver/info`);
+        const response = await axios.get(
+          `${serverUrl}/driver/info`
+          //  {
+          //   headers: {
+          //     authorization: cookies.access_token,
+          //   },
+          // }
+        );
+
         setInformation(response.data);
       } catch (err) {
         console.error(err);
@@ -44,7 +56,7 @@ export default function TableDemo() {
     };
 
     fetchInfo();
-  }, []);
+  }, [driverID]);
 
   const handleEdit = (driverId: string) => {
     const rowToEdit = information.find((info) => info._id === driverId);
@@ -58,6 +70,11 @@ export default function TableDemo() {
       const response = await axios.put(
         `${serverUrl}/driver/info/${driverId}`,
         editedData
+        // {
+        //   headers: {
+        //     authorization: cookies.access_token,
+        //   },
+        // }
       );
 
       // Update the data with the updated values
@@ -80,7 +97,14 @@ export default function TableDemo() {
   const handleDelete = async (driverId: string) => {
     try {
       // Send a DELETE request to the server to delete the driver info
-      await axios.delete(`${serverUrl}/driver/info/${driverId}`);
+      await axios.delete(
+        `${serverUrl}/driver/info/${driverId}`
+        // {
+        //   headers: {
+        //     authorization: cookies.access_token,
+        //   },
+        // }
+      );
 
       // Update the data by removing the deleted driver
       setInformation((prevData) =>
@@ -216,12 +240,6 @@ export default function TableDemo() {
                 </div>
               )}
             </TableCell>
-
-            {/* <TableCell>
-              <button onClick={() => handleDelete(info._id)}>
-                <Trash className="w-5 h-5" />
-              </button>
-            </TableCell> */}
           </TableRow>
         ))}
       </TableBody>

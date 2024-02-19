@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -18,11 +19,19 @@ interface DriverInfo {
 
 export function RecentSales() {
   const [information, setInformation] = useState<DriverInfo[]>([]);
+  // const [cookies] = useCookies(["access_token"]);
 
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(`${serverUrl}/driver/info`);
+        const response = await axios.get(
+          `${serverUrl}/driver/info`
+          //  {
+          //   headers: {
+          //     authorization: cookies.access_token,
+          //   },
+          // }
+        );
         setInformation(response.data);
       } catch (err) {
         console.error(err);
